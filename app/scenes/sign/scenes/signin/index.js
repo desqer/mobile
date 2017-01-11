@@ -6,8 +6,11 @@ import {
   Text,
   View,
   ActivityIndicator,
-  TouchableHighlight
+  TouchableHighlight,
+  Image
 } from 'react-native'
+
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import SignButton from 'app/scenes/sign/components/SignButton'
 import SignInput from 'app/scenes/sign/components/SignInput'
@@ -30,40 +33,45 @@ export default class SignIn extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <Image
+        style={styles.container}
+        source={ require('app/scenes/sign/img/background.png') }>
 
-        <View style={styles.logo}>
-          <Text style={styles.logoText}>DESQER</Text>
-        </View>
-
-        <View style={styles.form}>
-          <SignInput
-            placeholder="Digite seu e-mail"
-            autoCapitalize='none'
-            keyboardType='email-address' />
-
-          <SignInput
-            placeholder="Digite sua senha"
-            secureTextEntry={true} />
-
-          <SignButton
-            ref={component => this._signinbutton = component}
-            onPress={this.buttonPressed.bind(this)}>
-            Entrar
-          </SignButton>
-
-          <View style={styles.afterSignView}>
-            <TouchableHighlight
-              underlayColor='rgba(0,0,0,0)'
-              onPress={this.signUpPressed.bind(this)}>
-              <Text style={styles.alterSignText}>
-                Ainda não possui login?
-                <Text style={{fontWeight: "bold"}}> Crie sua conta</Text>
-              </Text>
-            </TouchableHighlight>
+          <View style={styles.logo}>
+            <Image
+              style={styles.logoImage}
+              source={ require('app/scenes/sign/img/logo.png') } />
           </View>
-        </View>
-      </View>
+
+          <View style={styles.form}>
+            <Icon name="ios-call-outline" size={30} color="#666" />
+
+            <SignInput
+              placeholder="Digite seu e-mail"
+              autoCapitalize='none'
+              keyboardType='email-address' />
+
+            <SignInput
+              placeholder="Digite sua senha"
+              secureTextEntry={true} />
+
+            <SignButton
+              ref={component => this._signinbutton = component}
+              onPress={this.buttonPressed.bind(this)}>
+              Entrar
+            </SignButton>
+
+            <View style={styles.afterSignView}>
+              <TouchableHighlight
+                underlayColor='rgba(0,0,0,0)'
+                onPress={this.signUpPressed.bind(this)}>
+                <Text style={styles.alterSignText}>
+                  Crie sua conta
+                </Text>
+              </TouchableHighlight>
+            </View>
+          </View>
+      </Image>
     )
   }
 }
@@ -71,10 +79,12 @@ export default class SignIn extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: undefined,
+    height: undefined,
     flexDirection: 'column',
     alignItems: 'center',
-    backgroundColor: '#f5f5f5',
-    padding: 40
+    backgroundColor: 'transparent',
+    padding: 20
   },
 
   logo: {
@@ -82,9 +92,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
 
-  logoText: {
-    fontSize: 36,
-    fontWeight: 'bold'
+  logoImage: {
+    width: 94,
+    height: 162
   },
 
   form: {
@@ -94,16 +104,14 @@ const styles = StyleSheet.create({
   },
 
   afterSignView: {
-    borderTopWidth: 1,
-    borderTopColor: '#ddd',
-    alignSelf: 'stretch',
-    marginTop: 20
+    alignSelf: 'stretch'
   },
 
   alterSignText: {
     alignSelf: 'center',
     fontSize: 13,
-    color: '#666666',
-    marginTop: 20
+    color: '#5A314F',
+    marginTop: 20,
+    fontWeight: "bold"
   }
 })

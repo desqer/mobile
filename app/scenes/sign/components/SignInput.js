@@ -7,6 +7,7 @@ import {
 const SignInput = props => (
   <TextInput
     style={[styles.input, props.style]}
+    placeholderTextColor="#666"
     {...props}>
   </TextInput>
 )
@@ -17,15 +18,12 @@ const styles = StyleSheet.create({
   input: {
     height: 50,
     backgroundColor: '#fff',
-    borderRadius: 25,
-    shadowColor: '#ccc',
-    shadowRadius: 10,
-    shadowOffset: {width: 0, height: 0},
-    shadowOpacity: 1,
+    borderRadius: 3,
     paddingLeft: 20,
-    fontSize: 12,
+    fontSize: 14,
     color: '#666',
-    marginTop: 15
+    marginTop: 10,
+    fontFamily: 'Helvetica'
   }
 })
 

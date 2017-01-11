@@ -27,7 +27,7 @@ export default class Button extends Component {
     if (this.state.loading === true) {
       return (
         <View>
-          <ActivityIndicator color='#FFF' /> 
+          <ActivityIndicator color='#FFF' />
         </View>
       );
     } else {
@@ -48,7 +48,7 @@ export default class Button extends Component {
     }
 
     return (
-      <View style={[{alignSelf: 'center'}]}>
+      <View style={[]}>
         <TouchableElement {...this.props}>
           { this.renderButtonContent() }
         </TouchableElement>
@@ -56,11 +56,3 @@ export default class Button extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  buttonText: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center'
-  }
-})
