@@ -12,15 +12,10 @@ export default class SignButton extends Component {
     super(props)
   }
 
-  buttonPressed() {
-   this._button.buttonPressed()
-  }
-
   render() {
     return (
       <Button
-        ref={component => this._button = component}
-        underlayColor='#BE446D'
+        underlayColor='#963355'
         style={[styles.button, this.props.style]}
         stylesText={styles.buttonText}
         {...this.props}>
@@ -30,8 +25,6 @@ export default class SignButton extends Component {
     );
   }
 }
-
-SignButton.propTypes = {}
 
 const styles = StyleSheet.create({
   button: {

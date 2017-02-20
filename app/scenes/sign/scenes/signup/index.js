@@ -5,9 +5,11 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableHighlight
+  TouchableHighlight,
+  Image
 } from 'react-native'
 
+import SignBackground from 'app/scenes/sign/components/SignBackground'
 import SignButton from 'app/scenes/sign/components/SignButton'
 import SignInput from 'app/scenes/sign/components/SignInput'
 
@@ -16,93 +18,64 @@ export default class SignIn extends Component {
     super(props)
   }
 
-  buttonPressed() {
-    // Login action
-    this._signupbutton.buttonPressed();
+  signUpPressed() {
+    // this.props.navigator.replace({
+    //   id: 'dashboard'
+    // });
   }
 
-  signInPressed() {
+  signPhonePressed() {
     this.props.navigator.pop();
   }
 
   render() {
     return (
-      <View style={styles.container}>
+      <SignBackground>
+        <SignInput
+          placeholder='Qual seu nome?'
+          autoCapitalize='words'
+          icon='ios-person-outline'
+          keyboardType='default'
+          autoFocus
+          ref={component => this._nameInput = component} />
 
-        <View style={styles.logo}>
-          <Text style={styles.logoText}>DESQER</Text>
+        <SignInput
+          placeholder='Digite sua senha'
+          autoCapitalize='none'
+          icon='ios-lock-outline'
+          keyboardType='default'
+          secureTextEntry
+          ref={component => this._passwordInput = component} />
+
+        <SignButton
+          onPress={this.signUpPressed.bind(this)}>
+          Criar conta grátis
+        </SignButton>
+
+        <View style={styles.afterSignView}>
+          <TouchableHighlight
+            underlayColor='rgba(0,0,0,0)'
+            onPress={this.signPhonePressed.bind(this)}>
+            <Text style={styles.afterSignText}>
+              Já sou usuário
+            </Text>
+          </TouchableHighlight>
         </View>
-
-        <View style={styles.form}>
-          <SignInput placeholder="Digite seu nome" />
-          <SignInput
-            placeholder="Digite seu e-mail"
-            autoCapitalize='none'
-            keyboardType='email-address' />
-
-          <SignInput
-            placeholder="Digite sua senha"
-            secureTextEntry={true} />
-
-          <SignButton
-            ref={component => this._signupbutton = component}
-            onPress={this.buttonPressed.bind(this)}>
-            Criar conta grátis
-          </SignButton>
-
-          <View style={styles.afterSignView}>
-            <TouchableHighlight
-              underlayColor='rgba(0,0,0,0)'
-              onPress={this.signInPressed.bind(this)}>
-              <Text style={styles.alterSignText}>
-                Já possui uma conta?
-                <Text style={{fontWeight: "bold"}}> Faça login</Text>
-              </Text>
-            </TouchableHighlight>
-          </View>
-        </View>
-
-      </View>
+      </SignBackground>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    backgroundColor: '#f5f5f5',
-    padding: 40
-  },
-
-  logo: {
-    flex: 2,
-    justifyContent: 'center'
-  },
-
-  logoText: {
-    fontSize: 36,
-    fontWeight: 'bold'
-  },
-
-  form: {
-    flex: 4,
-    flexDirection: 'column',
+  afterSignView: {
     alignSelf: 'stretch'
   },
 
-  afterSignView: {
-    borderTopWidth: 1,
-    borderTopColor: '#ddd',
-    alignSelf: 'stretch',
-    marginTop: 20
-  },
-
-  alterSignText: {
+  afterSignText: {
     alignSelf: 'center',
     fontSize: 13,
-    color: '#666666',
-    marginTop: 20
+    color: '#5A314F',
+    marginTop: 20,
+    fontWeight: 'bold'
   }
 })

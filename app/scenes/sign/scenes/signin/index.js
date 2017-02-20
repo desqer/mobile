@@ -1,17 +1,13 @@
 import React, { Component } from 'react'
 import {
-  Platform,
-  AppRegistry,
   StyleSheet,
   Text,
   View,
-  ActivityIndicator,
   TouchableHighlight,
   Image
 } from 'react-native'
 
-import Icon from 'react-native-vector-icons/Ionicons';
-
+import SignBackground from 'app/scenes/sign/components/SignBackground'
 import SignButton from 'app/scenes/sign/components/SignButton'
 import SignInput from 'app/scenes/sign/components/SignInput'
 
@@ -20,98 +16,116 @@ export default class SignIn extends Component {
     super(props)
   }
 
-  buttonPressed() {
-    // Login action
-    this._signinbutton.buttonPressed();
-  }
-
   signUpPressed() {
     this.props.navigator.push({
-      id: 'sign.signup'
+      id: 'calendar',
+      reset: true
     });
+  }
+
+  notMePressed() {
+    this.props.navigator.pop();
+  }
+
+  forgotPasswordPressed() {
+    //TODO: Create forgot password page
   }
 
   render() {
     return (
-      <Image
-        style={styles.container}
-        source={ require('app/scenes/sign/img/background.png') }>
+      <SignBackground>
+        <View style={styles.userContainer}>
+          <Image
+            style={styles.userAvatar}
+            source={{uri: 'https://tinyfac.es/data/avatars/5F8C5D50-DDB6-4F06-AA15-ACB30D8D910D-500w.jpeg'}}
+            />
 
-          <View style={styles.logo}>
-            <Image
-              style={styles.logoImage}
-              source={ require('app/scenes/sign/img/logo.png') } />
+          <View style={styles.userInfo}>
+            <Text
+              style={styles.userName}>
+              Bem-vindo, Diego
+            </Text>
+            <TouchableHighlight
+              underlayColor='rgba(0,0,0,0)'
+              onPress={this.notMePressed.bind(this)}>
+              <Text style={styles.notMeLink}>
+                este não sou eu
+              </Text>
+            </TouchableHighlight>
           </View>
+        </View>
 
-          <View style={styles.form}>
-            <Icon name="ios-call-outline" size={30} color="#666" />
+        <SignInput
+          placeholder='Digite sua senha'
+          autoCapitalize='none'
+          icon='ios-lock-outline'
+          keyboardType='default'
+          secureTextEntry
+          autoFocus
+          ref={component => this._passwordInput = component} />
 
-            <SignInput
-              placeholder="Digite seu e-mail"
-              autoCapitalize='none'
-              keyboardType='email-address' />
+        <SignButton
+          onPress={this.signUpPressed.bind(this)}>
+          Entrar
+        </SignButton>
 
-            <SignInput
-              placeholder="Digite sua senha"
-              secureTextEntry={true} />
-
-            <SignButton
-              ref={component => this._signinbutton = component}
-              onPress={this.buttonPressed.bind(this)}>
-              Entrar
-            </SignButton>
-
-            <View style={styles.afterSignView}>
-              <TouchableHighlight
-                underlayColor='rgba(0,0,0,0)'
-                onPress={this.signUpPressed.bind(this)}>
-                <Text style={styles.alterSignText}>
-                  Crie sua conta
-                </Text>
-              </TouchableHighlight>
-            </View>
-          </View>
-      </Image>
+        <View style={styles.afterSignView}>
+          <TouchableHighlight
+            underlayColor='rgba(0,0,0,0)'
+            onPress={this.forgotPasswordPressed.bind(this)}>
+            <Text style={styles.afterSignText}>
+              Esqueci minha senha
+            </Text>
+          </TouchableHighlight>
+        </View>
+      </SignBackground>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: undefined,
-    height: undefined,
-    flexDirection: 'column',
-    alignItems: 'center',
-    backgroundColor: 'transparent',
-    padding: 20
+  userContainer: {
+    backgroundColor: '#fff',
+    borderRadius: 3,
+    padding: 20,
+    marginTop: 10,
+    flexDirection: 'row'
   },
 
-  logo: {
-    flex: 2,
-    justifyContent: 'center'
+  userAvatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 25
   },
 
-  logoImage: {
-    width: 94,
-    height: 162
+  userInfo: {
+    marginLeft: 15,
+    alignSelf: 'center'
   },
 
-  form: {
-    flex: 3,
-    flexDirection: 'column',
-    alignSelf: 'stretch'
+  userName: {
+    fontWeight: '700',
+    color: '#666',
+    fontSize: 14,
+    fontFamily: 'Helvetica'
+  },
+
+  notMeLink: {
+    color: '#E7826A',
+    fontSize: 13,
+    marginTop: 5,
+    fontFamily: 'Helvetica'
   },
 
   afterSignView: {
     alignSelf: 'stretch'
   },
 
-  alterSignText: {
+  afterSignText: {
     alignSelf: 'center',
     fontSize: 13,
     color: '#5A314F',
     marginTop: 20,
-    fontWeight: "bold"
+    fontWeight: 'bold'
   }
 })

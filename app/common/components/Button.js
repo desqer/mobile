@@ -5,53 +5,26 @@ import {
   Text,
   View,
   TouchableHighlight,
-  TouchableNativeFeedback,
-  ActivityIndicator
+  TouchableNativeFeedback
 } from 'react-native';
+
+import Touchable from 'app/common/components/Touchable.js'
 
 export default class Button extends Component {
   constructor(props) {
     super(props);
-    this.state = { loading: false }
-  }
-
-  buttonPressed() {
-    this.setLoading(true)
-  }
-
-  setLoading(isLoading) {
-    this.setState({loading: isLoading})
-  }
-
-  renderButtonContent() {
-    if (this.state.loading === true) {
-      return (
-        <View>
-          <ActivityIndicator color='#FFF' />
-        </View>
-      );
-    } else {
-      return (
-        <View>
-          <Text style={this.props.stylesText}>
-            { this.props.children }
-          </Text>
-        </View>
-      )
-    }
   }
 
   render() {
-    var TouchableElement = TouchableHighlight
-    if (Platform.OS === 'android') {
-      TouchableElement = TouchableNativeFeedback
-    }
-
     return (
-      <View style={[]}>
-        <TouchableElement {...this.props}>
-          { this.renderButtonContent() }
-        </TouchableElement>
+      <View style={[{alignSelf: 'stretch'}]}>
+        <Touchable {...this.props}>
+          <View>
+            <Text style={this.props.stylesText}>
+              { this.props.children }
+            </Text>
+          </View>
+        </Touchable>
       </View>
     )
   }
