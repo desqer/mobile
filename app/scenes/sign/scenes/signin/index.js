@@ -7,8 +7,8 @@ import {
   Image
 } from 'react-native'
 
+import Button from 'app/common/components/Button'
 import SignBackground from 'app/scenes/sign/components/SignBackground'
-import SignButton from 'app/scenes/sign/components/SignButton'
 import SignInput from 'app/scenes/sign/components/SignInput'
 
 export default class SignIn extends Component {
@@ -61,13 +61,14 @@ export default class SignIn extends Component {
           icon='ios-lock-outline'
           keyboardType='default'
           secureTextEntry
-          autoFocus
           ref={component => this._passwordInput = component} />
 
-        <SignButton
+        <Button
+          size="large"
+          color="primary"
           onPress={this.signUpPressed.bind(this)}>
           Entrar
-        </SignButton>
+        </Button>
 
         <View style={styles.afterSignView}>
           <TouchableHighlight

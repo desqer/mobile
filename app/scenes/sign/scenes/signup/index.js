@@ -9,8 +9,8 @@ import {
   Image
 } from 'react-native'
 
+import Button from 'app/common/components/Button'
 import SignBackground from 'app/scenes/sign/components/SignBackground'
-import SignButton from 'app/scenes/sign/components/SignButton'
 import SignInput from 'app/scenes/sign/components/SignInput'
 
 export default class SignIn extends Component {
@@ -36,7 +36,6 @@ export default class SignIn extends Component {
           autoCapitalize='words'
           icon='ios-person-outline'
           keyboardType='default'
-          autoFocus
           ref={component => this._nameInput = component} />
 
         <SignInput
@@ -47,10 +46,12 @@ export default class SignIn extends Component {
           secureTextEntry
           ref={component => this._passwordInput = component} />
 
-        <SignButton
+        <Button
+          size="large"
+          color="primary"
           onPress={this.signUpPressed.bind(this)}>
           Criar conta grátis
-        </SignButton>
+        </Button>
 
         <View style={styles.afterSignView}>
           <TouchableHighlight

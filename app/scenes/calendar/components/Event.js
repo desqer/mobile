@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  TouchableOpacity
 } from 'react-native';
 
-import Touchable from 'app/common/components/Touchable.js'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 export default class Event extends Component {
@@ -18,7 +18,7 @@ export default class Event extends Component {
     } = this.props
 
     return (
-      <Touchable onPress={this.props.onPress}>
+      <TouchableOpacity onPress={this.props.onPress}>
         <View style={styles.eventContainer}>
           <View style={styles.eventInfoContainer}>
             <View style={styles.eventMetaContainer}>
@@ -40,70 +40,70 @@ export default class Event extends Component {
           </View>
           <Icon style={styles.moreIcon} name="ios-more" size={32} color="#CCC" />
         </View>
-      </Touchable>
+      </TouchableOpacity>
     );
   }
 }
 
 const styles = StyleSheet.create({
   eventContainer: {
-     backgroundColor: '#FFF',
-     padding: 15,
-     marginBottom: 15,
-     borderRadius: 3,
-     shadowColor: "#BBB",
-     shadowOpacity: 0.5,
-     shadowRadius: 8,
-     flexDirection: 'row'
-   },
+    backgroundColor: '#FFF',
+    padding: 15,
+    marginBottom: 15,
+    borderRadius: 3,
+    shadowColor: "#BBB",
+    shadowOpacity: 0.5,
+    shadowRadius: 8,
+    flexDirection: 'row'
+  },
 
-   eventInfoContainer: {
-     flex: 1
-   },
+  eventInfoContainer: {
+    flex: 1
+  },
 
-   eventMetaContainer: {
-     flexDirection: 'row'
-   },
+  eventMetaContainer: {
+    flexDirection: 'row'
+  },
 
-   eventMeta: {
-     flexDirection: 'row',
-     paddingRight: 10,
-     marginRight: 10,
-     borderRightWidth: 1,
-     borderColor: '#EEE',
-     borderStyle: 'solid'
-   },
+  eventMeta: {
+    flexDirection: 'row',
+    paddingRight: 10,
+    marginRight: 10,
+    borderRightWidth: 1,
+    borderColor: '#EEE',
+    borderStyle: 'solid'
+  },
 
-   eventMetaLast: {
-     borderRightWidth: 0,
-     paddingRight: 0,
-     marginRight: 0
-   },
+  eventMetaLast: {
+    borderRightWidth: 0,
+    paddingRight: 0,
+    marginRight: 0
+  },
 
-   eventMetaText: {
-     fontSize: 12,
-     color: '#666',
-     fontFamily: 'Helvetica',
-     marginLeft: 5
-   },
+  eventMetaText: {
+    fontSize: 12,
+    color: '#666',
+    fontFamily: 'Helvetica',
+    marginLeft: 5
+  },
 
-   eventTitle: {
-     marginTop: 10,
-     fontSize: 14,
-     fontWeight: '700',
-     fontFamily: 'Helvetica',
-     color: '#333'
-   },
+  eventTitle: {
+    marginTop: 10,
+    fontSize: 14,
+    fontWeight: '700',
+    fontFamily: 'Helvetica',
+    color: '#333'
+  },
 
-   eventDescription: {
-     marginTop: 5,
-     fontSize: 12,
-     fontFamily: 'Helvetica',
-     color: '#666'
-   },
+  eventDescription: {
+    marginTop: 5,
+    fontSize: 12,
+    fontFamily: 'Helvetica',
+    color: '#666'
+  },
 
-   moreIcon: {
-     alignSelf: 'center',
-     marginRight: 10
-   }
+  moreIcon: {
+    alignSelf: 'center',
+    marginRight: 10
+  }
 });

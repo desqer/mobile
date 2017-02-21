@@ -3,9 +3,9 @@ import {
   View,
   Text,
   StyleSheet,
+  TouchableOpacity,
 } from 'react-native';
 
-import Touchable from 'app/common/components/Touchable.js'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 export default class Footer extends Component {
@@ -16,15 +16,15 @@ export default class Footer extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Touchable style={styles.tab}>
+        <TouchableOpacity style={styles.tab}>
           <Icon style={styles.tabIcon}
             name="ios-people-outline"
             size={26}
             color="#FFF"
             />
           <Text style={styles.tabText}>Minha conta</Text>
-        </Touchable>
-        <Touchable style={styles.tab}
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.tab}
           activeOpacity={1.0}
           onPress={this.props.onNewPressed}>
           <View style={styles.hexagon}>
@@ -38,15 +38,15 @@ export default class Footer extends Component {
             <View style={styles.hexagonBefore} />
             <View style={styles.hexagonAfter} />
           </View>
-        </Touchable>
-        <Touchable style={styles.tab}>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.tab}>
           <Icon style={styles.tabIcon}
             name="ios-bookmarks-outline"
             size={26}
             color="#FFF"
             />
           <Text style={styles.tabText}>Faturas</Text>
-        </Touchable>
+        </TouchableOpacity>
       </View>
     );
   }

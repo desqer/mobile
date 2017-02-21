@@ -4,8 +4,8 @@ import {
   View
 } from 'react-native'
 
+import Button from 'app/common/components/Button'
 import SignBackground from 'app/scenes/sign/components/SignBackground'
-import SignButton from 'app/scenes/sign/components/SignButton'
 import SignInput from 'app/scenes/sign/components/SignInput'
 
 export default class SignPhone extends Component {
@@ -22,24 +22,21 @@ export default class SignPhone extends Component {
   render() {
     return (
       <SignBackground>
-          <View style={styles.form}>
+          <View>
             <SignInput
               placeholder='Digite seu telefone'
               autoCapitalize='none'
-              icon='ios-call-outline'
               keyboardType='numeric'
-              autoFocus
               ref={component => this._textInput = component} />
 
-            <SignButton
+            <Button
+              size="large"
+              color="primary"
               onPress={this.signUpPressed.bind(this)}>
               Avançar
-            </SignButton>
+            </Button>
           </View>
       </SignBackground>
     )
   }
 }
-
-const styles = StyleSheet.create({
-})

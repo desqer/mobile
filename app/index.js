@@ -41,7 +41,7 @@ export default class Desqer extends Component {
       <Navigator
         ref='navigator'
         configureScene={this.navigatorTransitions}
-        initialRoute={{id: 'sign.signin'}}
+        initialRoute={{id: 'sign.signphone'}}
         renderScene={this.navigatorRoutes}
         onDidFocus={(route) => {
           if (route.reset) {

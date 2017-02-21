@@ -4,11 +4,11 @@ import {
   Text,
   StyleSheet,
   StatusBar,
-  TextInput
+  TextInput,
+    TouchableOpacity
 } from 'react-native';
 
 import IconInput from 'app/common/components/IconInput.js'
-import Touchable from 'app/common/components/Touchable.js'
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class Header extends Component {
@@ -16,9 +16,9 @@ export default class Header extends Component {
     return (
       <View style={styles.container}>
         <StatusBar barStyle="default" />
-        <Touchable style={styles.headerAlign}>
+        <TouchableOpacity style={styles.headerAlign}>
           <Icon name='ios-swap' size={18} color="#999" />
-        </Touchable>
+        </TouchableOpacity>
 
         <IconInput
           containerStyle={styles.inputContainer}
@@ -32,7 +32,7 @@ export default class Header extends Component {
           {...this.props}
           />
 
-        <Touchable style={styles.headerAlign}>
+        <TouchableOpacity style={styles.headerAlign}>
           <View style={styles.notificationContainer}>
             <View style={styles.notificationBadge}>
               <Text style={styles.notificationText}>
@@ -41,7 +41,7 @@ export default class Header extends Component {
             </View>
             <Icon style={styles.headerAlign} name='ios-notifications-outline' size={18} color="#999" />
           </View>
-        </Touchable>
+        </TouchableOpacity>
       </View>
     );
   }
