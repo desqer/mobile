@@ -4,9 +4,9 @@ import {
   View
 } from 'react-native'
 
+import Input from 'app/common/components/Input'
 import Button from 'app/common/components/Button'
 import SignBackground from 'app/scenes/sign/components/SignBackground'
-import SignInput from 'app/scenes/sign/components/SignInput'
 
 export default class SignPhone extends Component {
   constructor(props) {
@@ -23,9 +23,10 @@ export default class SignPhone extends Component {
     return (
       <SignBackground>
           <View>
-            <SignInput
+            <Input
               placeholder='Digite seu telefone'
               autoCapitalize='none'
+              icon='ios-call-outline'
               keyboardType='numeric'
               ref={component => this._textInput = component} />
 

@@ -9,9 +9,9 @@ import {
   Image
 } from 'react-native'
 
+import Input from 'app/common/components/Input'
 import Button from 'app/common/components/Button'
 import SignBackground from 'app/scenes/sign/components/SignBackground'
-import SignInput from 'app/scenes/sign/components/SignInput'
 
 export default class SignIn extends Component {
   constructor(props) {
@@ -31,14 +31,14 @@ export default class SignIn extends Component {
   render() {
     return (
       <SignBackground>
-        <SignInput
+        <Input
           placeholder='Qual seu nome?'
           autoCapitalize='words'
           icon='ios-person-outline'
           keyboardType='default'
           ref={component => this._nameInput = component} />
 
-        <SignInput
+        <Input
           placeholder='Digite sua senha'
           autoCapitalize='none'
           icon='ios-lock-outline'

@@ -8,7 +8,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 
-import IconInput from 'app/common/components/IconInput.js'
+import Input from 'app/common/components/Input'
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class Header extends Component {
@@ -20,7 +20,7 @@ export default class Header extends Component {
           <Icon name='ios-swap' size={18} color="#999" />
         </TouchableOpacity>
 
-        <IconInput
+        <Input
           containerStyle={styles.inputContainer}
           iconContainerStyle={styles.icon}
           inputStyle={[styles.input]}
@@ -70,19 +70,21 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     flexDirection: 'row',
     marginHorizontal: 15,
-    flex: 1
+    flex: 1,
+    marginTop: 0
   },
 
   icon: {
     alignSelf: 'center',
-    paddingRight: 10
+    paddingLeft: 0
   },
 
   input: {
     fontSize: 12,
     color: '#666',
     fontFamily: 'Helvetica',
-    flex: 1
+    flex: 1,
+    paddingHorizontal: 10
   },
 
   notificationContainer: {
