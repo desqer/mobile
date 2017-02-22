@@ -7,7 +7,8 @@ import {
   TouchableOpacity
 } from 'react-native'
 
-import variables from 'app/common/stylesheet/Variables'
+import Variables from 'app/common/stylesheet/Variables'
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class Button extends Component {
   constructor(props) {
@@ -15,6 +16,21 @@ export default class Button extends Component {
   }
 
   render() {
+    /**
+     * Render icon
+     */
+    let icon = null;
+    if (this.props.icon) {
+      icon = (
+        <Icon
+          style={[styles.icon, this.props.iconStyle]}
+          name={this.props.icon}
+          size={this.props.iconSize || 16}
+          color={this.props.iconColor || '#FFF'}
+          />
+      )
+    }
+
     return (
       <TouchableOpacity
         activeOpacity={0.9}
@@ -26,7 +42,8 @@ export default class Button extends Component {
           this.props.style
         ]}
         {...this.props}>
-        <View>
+        <View style={styles.buttonContent}>
+          { icon }
           <Text style={styles.buttonText}>
             { this.props.children }
           </Text>
@@ -54,23 +71,31 @@ const styles = StyleSheet.create({
   },
 
   'button-color-primary': {
-    backgroundColor: variables.colors.primary,
+    backgroundColor: Variables.colors.primary,
   },
 
   'button-color-secundary': {
-    backgroundColor: variables.colors.secundary,
+    backgroundColor: Variables.colors.secundary,
   },
 
   'button-color-success': {
-    backgroundColor: variables.colors.success,
+    backgroundColor: Variables.colors.success,
   },
 
   'button-color-danger': {
-    backgroundColor: variables.colors.danger,
+    backgroundColor: Variables.colors.danger,
+  },
+
+  icon: {
+    marginRight: 10
+  },
+
+  buttonContent: {
+    alignSelf: 'center',
+    flexDirection: 'row',
   },
 
   buttonText: {
-    alignSelf: 'center',
     color: '#FFF',
     fontWeight: 'bold',
     fontSize: 14
