@@ -58,9 +58,10 @@ export default class IconInput extends Component {
         ]}>
         { icon }
         <TextInput
+          underlineColorAndroid='rgba(0,0,0,0)'
           ref={input => this._textInput = input}
           style={[styles.input, this.props.inputStyle]}
-          placeholderTextColor="#666"
+          placeholderTextColor="#666" 
           {...this.props}
           />
         { optional }

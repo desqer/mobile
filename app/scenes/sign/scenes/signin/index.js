@@ -3,7 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableHighlight,
+  TouchableOpacity,
   Image
 } from 'react-native'
 
@@ -45,13 +45,13 @@ export default class SignIn extends Component {
               style={styles.userName}>
               Bem-vindo, Diego
             </Text>
-            <TouchableHighlight
-              underlayColor='rgba(0,0,0,0)'
+            <TouchableOpacity
+              activeOpacity={0.6}
               onPress={this.notMePressed.bind(this)}>
               <Text style={styles.notMeLink}>
                 este não sou eu
               </Text>
-            </TouchableHighlight>
+            </TouchableOpacity>
           </View>
         </View>
 
@@ -71,13 +71,13 @@ export default class SignIn extends Component {
         </Button>
 
         <View style={styles.afterSignView}>
-          <TouchableHighlight
-            underlayColor='rgba(0,0,0,0)'
+          <TouchableOpacity
+            activeOpacity={0.6}
             onPress={this.forgotPasswordPressed.bind(this)}>
             <Text style={styles.afterSignText}>
               Esqueci minha senha
             </Text>
-          </TouchableHighlight>
+          </TouchableOpacity>
         </View>
       </SignBackground>
     )
