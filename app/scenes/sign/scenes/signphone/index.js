@@ -6,8 +6,6 @@ import {
 } from 'react-native'
 
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import * as actions from './redux/actions'
 
 import Input from 'app/common/components/Input'
 import Button from 'app/common/components/Button'
@@ -16,14 +14,6 @@ import SignBackground from 'app/scenes/sign/components/SignBackground'
 class SignPhone extends Component {
   signUpPressed() {
     this.props.fetchUserByPhone('96523842')
-  }
-
-  componentDidMount() {
-    console.log(this.state, this.props)
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps)
   }
 
   render() {
@@ -53,4 +43,10 @@ class SignPhone extends Component {
   }
 }
 
-export default connect(state => state, (dispatch) => bindActionCreators(actions, dispatch))(SignPhone)
+function mapStateToProps(state) {
+  return {
+    signUser: state.signUser
+  };
+}
+
+export default connect(mapStateToProps)(SignPhone)
