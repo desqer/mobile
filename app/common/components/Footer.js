@@ -1,55 +1,46 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { Scene } from 'react-native-router-flux'
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
-} from 'react-native';
+} from 'react-native'
 
 import Icon from 'react-native-vector-icons/Ionicons'
 
-export default class Footer extends Component {
-  newPressed() {
-    console.log('pressed')
-  }
+export const ProfileIcon = ({ selected, title }) => {
+  return (
+    <View style={styles.tabIcon}>
+      <Icon color='#FFF' size={26} name="ios-call-outline" />
+      <Text style={styles.tabText}>{ title }</Text>
+    </View>
+  )
+}
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <TouchableOpacity style={styles.tab}>
-          <Icon style={styles.tabIcon}
-            name="ios-people-outline"
-            size={26}
-            color="#FFF"
-            />
-          <Text style={styles.tabText}>Minha conta</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.tab}
-          activeOpacity={1.0}
-          onPress={this.props.onNewPressed}>
-          <View style={styles.hexagon}>
-            <View style={styles.hexagonInner}>
-              <Icon style={styles.tabIcon}
-                name="md-add"
-                size={30}
-                color="#BE446D"
-                />
-            </View>
-            <View style={styles.hexagonBefore} />
-            <View style={styles.hexagonAfter} />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.tab}>
-          <Icon style={styles.tabIcon}
-            name="ios-bookmarks-outline"
-            size={26}
-            color="#FFF"
-            />
-          <Text style={styles.tabText}>Faturas</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
+export const DesqerIcon = ({ selected, title }) => {
+  return (
+    <View style={styles.hexagon}>
+      <View style={styles.hexagonInner}>
+         <Icon style={styles.tabIcon}
+           name="md-add"
+           size={30}
+           color="#BE446D"
+           />
+       </View>
+       <View style={styles.hexagonBefore} />
+       <View style={styles.hexagonAfter} />
+     </View>
+  )
+}
+
+export const HistoryIcon = ({ selected, title }) => {
+  return (
+    <View style={styles.tabIcon}>
+      <Icon color='#FFF' size={26} name="ios-call-outline" />
+      <Text style={styles.tabText}>{ title }</Text>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
@@ -67,7 +58,7 @@ const styles = StyleSheet.create({
   },
 
   tabIcon: {
-    alignSelf: 'center'
+    alignItems: 'center'
   },
 
   tabText: {
@@ -82,19 +73,21 @@ const styles = StyleSheet.create({
     height: 60,
     alignSelf: 'center'
   },
+
   hexagonInner: {
     width: 60,
     height: 30,
     backgroundColor: '#FFF',
     position: 'absolute',
-    top: -10,
+    top: -3,
     shadowColor: "#333",
     shadowOpacity: 0.2,
     shadowRadius: 5,
+    alignItems: 'center'
   },
   hexagonAfter: {
     position: 'absolute',
-    bottom: 20,
+    bottom: 13,
     borderLeftWidth: 30,
     borderLeftColor: 'transparent',
     borderRightWidth: 30,
@@ -104,7 +97,7 @@ const styles = StyleSheet.create({
   },
   hexagonBefore: {
     position: 'absolute',
-    top: -30,
+    top: -23,
     borderLeftWidth: 30,
     borderLeftColor: 'transparent',
     borderRightWidth: 30,

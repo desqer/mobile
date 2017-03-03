@@ -44,9 +44,13 @@ import Calendar from 'app/scenes/calendar'
 import Detail from 'app/scenes/event/scenes/detail'
 
 /**
- * Common components
+ * Tab icons
  */
-import Footer from 'app/common/components/Footer'
+import {
+  ProfileIcon,
+  DesqerIcon,
+  HistoryIcon
+} from 'app/common/components/Footer'
 
 export default class Desqer extends Component {
   render() {
@@ -54,7 +58,15 @@ export default class Desqer extends Component {
       <Provider store={store}>
         <ReduxRouter>
           <Scene key="root" hideNavBar={true}>
-            <Scene key="sign.signphone" component={SignPhone} title="Entrar" initial={true} />
+            <Scene
+              key="tabbar"
+              tabs={true}
+              tabBarStyle={{ height: 60, backgroundColor: '#BE446D' }}
+            >
+              <Scene key="profile" hideNavBar={true} component={SignPhone} title="Minha conta" icon={ProfileIcon} />
+              <Scene key="services" hideNavBar={true} component={SignPhone} icon={DesqerIcon} />
+              <Scene key="history" hideNavBar={true} component={Calendar} title="Histórico" icon={HistoryIcon} />
+            </Scene>
           </Scene>
         </ReduxRouter>
       </Provider>
