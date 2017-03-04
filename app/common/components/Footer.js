@@ -1,10 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Scene } from 'react-native-router-flux'
 import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity,
 } from 'react-native'
 
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -12,7 +11,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 export const ProfileIcon = ({ selected, title }) => {
   return (
     <View style={styles.tabIcon}>
-      <Icon color='#FFF' size={26} name="ios-call-outline" />
+      <Icon color='#FFF' size={26} name="ios-person-outline" />
       <Text style={styles.tabText}>{ title }</Text>
     </View>
   )
@@ -37,7 +36,7 @@ export const DesqerIcon = ({ selected, title }) => {
 export const HistoryIcon = ({ selected, title }) => {
   return (
     <View style={styles.tabIcon}>
-      <Icon color='#FFF' size={26} name="ios-call-outline" />
+      <Icon color='#FFF' size={26} name="ios-bookmarks-outline" />
       <Text style={styles.tabText}>{ title }</Text>
     </View>
   )
