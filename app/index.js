@@ -58,15 +58,11 @@ export default class Desqer extends Component {
       <Provider store={store}>
         <ReduxRouter>
           <Scene key="root" hideNavBar={true}>
-            <Scene
-              key="tabbar"
-              tabs={true}
-              tabBarStyle={{ height: 60, backgroundColor: '#BE446D' }}
-            >
-              <Scene key="profile" hideNavBar={true} component={SignPhone} title="Minha conta" icon={ProfileIcon} />
-              <Scene key="services" hideNavBar={true} component={SignPhone} icon={DesqerIcon} />
-              <Scene key="history" hideNavBar={true} component={Calendar} title="Histórico" icon={HistoryIcon} />
-            </Scene>
+            <Scene key="signPhone" component={SignPhone} initial={true} />
+            <Scene key="signUp" component={SignUp} />
+            <Scene key="signIn" component={SignIn} />
+<Scene key="calendar" hideNavBar={true} component={Calendar} icon={DesqerIcon} />
+
           </Scene>
         </ReduxRouter>
       </Provider>

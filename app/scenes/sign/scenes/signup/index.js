@@ -9,23 +9,24 @@ import {
   Image
 } from 'react-native'
 
+import { connect } from 'react-redux'
+import { Actions, ActionConst } from 'react-native-router-flux'
+
 import Input from 'app/common/components/Input'
 import Button from 'app/common/components/Button'
 import SignBackground from 'app/scenes/sign/components/SignBackground'
 
-export default class SignIn extends Component {
+class SignUp extends Component {
   constructor(props) {
     super(props)
   }
 
   signUpPressed() {
-    // this.props.navigator.replace({
-    //   id: 'dashboard'
-    // });
+    Actions.signIn({ type: ActionConst.REPLACE })
   }
 
   signPhonePressed() {
-    this.props.navigator.pop();
+    Actions.signPhone({ type: ActionConst.REPLACE })
   }
 
   render() {
@@ -80,3 +81,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   }
 })
+
+function mapStateToProps(state) {
+  return {
+
+  };
+}
+
+export default connect(mapStateToProps)(SignUp)

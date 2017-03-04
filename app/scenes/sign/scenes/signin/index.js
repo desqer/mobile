@@ -7,24 +7,24 @@ import {
   Image
 } from 'react-native'
 
+import { connect } from 'react-redux'
+import { Actions, ActionConst } from 'react-native-router-flux'
+
 import Input from 'app/common/components/Input'
 import Button from 'app/common/components/Button'
 import SignBackground from 'app/scenes/sign/components/SignBackground'
 
-export default class SignIn extends Component {
+class SignIn extends Component {
   constructor(props) {
     super(props)
   }
 
   signUpPressed() {
-    this.props.navigator.push({
-      id: 'calendar',
-      reset: true
-    });
+    Actions.calendar({ type: ActionConst.REPLACE })
   }
 
   notMePressed() {
-    this.props.navigator.pop();
+    Actions.signUp({ type: ActionConst.REPLACE })
   }
 
   forgotPasswordPressed() {
@@ -130,3 +130,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   }
 })
+
+function mapStateToProps(state) {
+  return {
+
+  };
+}
+
+export default connect(mapStateToProps)(SignIn)
