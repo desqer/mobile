@@ -9,7 +9,6 @@ import {
   ActivityIndicatorIOS
 } from 'react-native'
 
-import Header from 'app/scenes/calendar/components/Header'
 import Event from 'app/scenes/calendar/components/Event'
 
 export default class Calendar extends Component {
@@ -80,7 +79,6 @@ export default class Calendar extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Header />
         <View style={styles.contentContainer}>
           <ListView
             enableEmptySections
@@ -113,7 +111,8 @@ export default class Calendar extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5'
+    backgroundColor: '#f5f5f5',
+    paddingTop: 65
   },
 
   contentContainer: {

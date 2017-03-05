@@ -1,25 +1,57 @@
-import React, { Component } from 'react';
+import React from 'react'
 import {
   View,
   Text,
   StyleSheet,
-  StatusBar,
   TextInput,
-    TouchableOpacity
-} from 'react-native';
+  TouchableOpacity,
+  StatusBar
+} from 'react-native'
 
 import Input from 'app/common/components/Input'
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Ionicons'
+import { NavBar } from 'react-native-router-flux'
 
-export default class Header extends Component {
-  render() {
+export default class Header extends NavBar {
+  renderBackButton() {
+    //Todo:: create render for back-enabled scenes
+    return null
+  }
+
+  leftButton() {
     return (
-      <View style={styles.container}>
-        <StatusBar barStyle="default" />
-        <TouchableOpacity style={styles.headerAlign}>
-          <Icon name='ios-swap' size={18} color="#999" />
-        </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.headerAlign}
+        activeOpacity={0.6}
+      >
+        <Icon name='ios-swap' size={18} color="#999" />
+      </TouchableOpacity>
+    )
+  }
 
+  rightButton() {
+    return (
+      <TouchableOpacity
+        style={styles.headerAlign}
+        activeOpacity={0.6}
+      >
+        <View style={styles.notificationContainer}>
+          <View style={styles.notificationBadge}>
+            <Text style={styles.notificationText}>
+              3
+            </Text>
+          </View>
+          <Icon style={styles.headerAlign} name='ios-notifications-outline' size={18} color="#999" />
+        </View>
+      </TouchableOpacity>
+    )
+  }
+
+  renderTitle() {
+    return (
+      <View style={styles.container} key={1}>
+        <StatusBar hidden={false} />
+        { this.leftButton() }
         <Input
           containerStyle={styles.inputContainer}
           iconContainerStyle={styles.icon}
@@ -29,33 +61,15 @@ export default class Header extends Component {
           iconColor="#AAA"
           placeholderTextColor="#AAA"
           placeholder="Buscar um compromisso"
-          {...this.props}
-          />
-
-        <TouchableOpacity style={styles.headerAlign}>
-          <View style={styles.notificationContainer}>
-            <View style={styles.notificationBadge}>
-              <Text style={styles.notificationText}>
-                3
-              </Text>
-            </View>
-            <Icon style={styles.headerAlign} name='ios-notifications-outline' size={18} color="#999" />
-          </View>
-        </TouchableOpacity>
+        />
+        { this.rightButton() }
       </View>
-    );
+    )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFF',
-    shadowColor: "#ddd",
-    shadowOpacity: 1,
-    shadowRadius: 10,
-    paddingTop: 30,
-    paddingHorizontal: 20,
-    paddingBottom: 10,
     flexDirection: 'row'
   },
 

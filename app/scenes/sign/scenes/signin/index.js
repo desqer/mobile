@@ -20,7 +20,7 @@ class SignIn extends Component {
   }
 
   signUpPressed() {
-    Actions.calendar({ type: ActionConst.REPLACE })
+    Actions.app() 
   }
 
   notMePressed() {
