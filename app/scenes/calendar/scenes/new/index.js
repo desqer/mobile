@@ -7,6 +7,7 @@ import {
 
 import DText from 'app/common/components/DText'
 import Input from 'app/common/components/Input'
+import Checkbox from 'app/common/components/Checkbox'
 import Container from 'app/common/components/Container'
 
 export default class New extends Component {
@@ -14,11 +15,7 @@ export default class New extends Component {
     return (
       <Container>
         <Text>Hello World</Text>
-        <Input
-          shadow={true}
-          placeholder='Digite seu telefone'
-          autoCapitalize='none'
-        />
+        <Checkbox label="Permitir agendamento on-line" />
       </Container>
     );
   }
