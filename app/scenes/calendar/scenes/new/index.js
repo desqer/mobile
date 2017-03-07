@@ -5,6 +5,7 @@ import {
   StyleSheet,
 } from 'react-native';
 
+import DText from 'app/common/components/DText'
 import Container from 'app/common/components/Container'
 
 export default class New extends Component {

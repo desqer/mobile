@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import {
   Platform,
   View,
-  Text,
   TouchableOpacity,
   TextInput,
   StyleSheet,
 } from 'react-native';
 
+import DText from 'app/common/components/DText'
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class IconInput extends Component {
@@ -47,7 +47,7 @@ export default class IconInput extends Component {
     */
     let optional = null;
     if (this.props.optional === true) {
-      optional = <Text style={styles.optional}>opcional</Text>
+      optional = <DText style={styles.optional}>opcional</DText>
     }
 
     return (

@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   View,
-  Text,
   StyleSheet,
   TextInput,
   TouchableOpacity,
@@ -9,7 +8,7 @@ import {
 } from 'react-native'
 
 import Actions from 'react-native-router-flux'
-
+import DText from 'app/common/components/DText'
 import Input from 'app/common/components/Input'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { NavBar } from 'react-native-router-flux'
@@ -46,9 +45,9 @@ export default class Header extends NavBar {
       >
         <View style={styles.notificationContainer}>
           <View style={styles.notificationBadge}>
-            <Text style={styles.notificationText}>
+            <DText style={styles.notificationText}>
               3
-            </Text>
+            </DText>
           </View>
           <Icon style={styles.headerAlign} name='ios-notifications-outline' size={18} color="#999" />
         </View>
@@ -58,7 +57,7 @@ export default class Header extends NavBar {
 
   titleContainer() {
     if (this.props.title) {
-      return <Text style={styles.titleContainer}>{ this.props.title }</Text>
+      return <DText style={styles.titleContainer}>{ this.props.title }</DText>
     } else {
       return (
         <Input
@@ -124,9 +123,7 @@ const styles = StyleSheet.create({
     lineHeight: 30,
     textAlign: 'center',
     color: '#333',
-    fontWeight: 'bold',
-    fontFamily: 'Helvetica'
-  },
+    fontWeight: 'bold',  },
 
   icon: {
     alignSelf: 'center',
@@ -136,7 +133,6 @@ const styles = StyleSheet.create({
   input: {
     fontSize: 12,
     color: '#666',
-    fontFamily: 'Helvetica',
     flex: 1,
     paddingHorizontal: 10
   },
@@ -156,7 +152,6 @@ const styles = StyleSheet.create({
   },
 
   notificationText: {
-    fontFamily: 'Helvetica',
     fontSize: 12,
     color: '#FFF',
     textAlign: 'center'

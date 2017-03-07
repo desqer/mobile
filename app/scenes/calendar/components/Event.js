@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import {
   View,
-  Text,
   StyleSheet
 } from 'react-native';
 
+import DText from 'app/common/components/DText'
 import Box from 'app/common/components/Box'
-
 import Icon from 'react-native-vector-icons/Ionicons'
 
 export default class Event extends Component {
@@ -23,19 +22,19 @@ export default class Event extends Component {
         <View style={styles.eventMetaContainer}>
           <View style={styles.eventMeta}>
             <Icon style={styles.eventMetaIcon} name="ios-clock-outline" size={14} color="#666" />
-            <Text style={styles.eventMetaText}>
+            <DText style={styles.eventMetaText}>
               {time}
-            </Text>
+            </DText>
           </View>
           <View style={[styles.eventMeta, styles.eventMetaLast]}>
             <Icon style={styles.eventMetaIcon} name="ios-map-outline" size={14} color="#666" />
-            <Text style={styles.eventMetaText}>
+            <DText style={styles.eventMetaText}>
               {place}
-            </Text>
+            </DText>
           </View>
         </View>
-        <Text style={styles.eventTitle}>{title}</Text>
-        <Text style={styles.eventDescription}>{description}</Text>
+        <DText style={styles.eventTitle}>{title}</DText>
+        <DText style={styles.eventDescription}>{description}</DText>
       </Box>
     );
   }
@@ -64,7 +63,6 @@ const styles = StyleSheet.create({
   eventMetaText: {
     fontSize: 12,
     color: '#666',
-    fontFamily: 'Helvetica',
     marginLeft: 5
   },
 
@@ -72,14 +70,12 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 14,
     fontWeight: '700',
-    fontFamily: 'Helvetica',
     color: '#333'
   },
 
   eventDescription: {
     marginTop: 5,
     fontSize: 12,
-    fontFamily: 'Helvetica',
     color: '#666'
   }
 });

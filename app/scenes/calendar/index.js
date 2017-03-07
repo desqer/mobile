@@ -9,6 +9,7 @@ import {
   ActivityIndicatorIOS
 } from 'react-native'
 
+import DText from 'app/common/components/DText'
 import Event from 'app/scenes/calendar/components/Event'
 
 export default class Calendar extends Component {
@@ -103,7 +104,7 @@ export default class Calendar extends Component {
 
   renderSectionHeader(sectionId, headerText) {
     return (
-      <Text style={styles.dateTitle}>{headerText}</Text>
+      <DText style={styles.dateTitle}>{headerText}</DText>
     )
   }
 }
@@ -127,7 +128,6 @@ const styles = StyleSheet.create({
   dateTitle: {
     fontWeight: '700',
     fontSize: 13,
-    fontFamily: 'Helvetica',
     color: '#666',
     alignSelf: 'center',
     marginBottom: 15

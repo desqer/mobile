@@ -3,15 +3,15 @@ import {
   Platform,
   AppRegistry,
   StyleSheet,
-  Text,
   View,
-  TouchableHighlight,
+  TouchableOpacity,
   Image
 } from 'react-native'
 
 import { connect } from 'react-redux'
 import { Actions, ActionConst } from 'react-native-router-flux'
 
+import DText from 'app/common/components/DText'
 import Input from 'app/common/components/Input'
 import Button from 'app/common/components/Button'
 import SignBackground from 'app/scenes/sign/components/SignBackground'
@@ -55,13 +55,13 @@ class SignUp extends Component {
         </Button>
 
         <View style={styles.afterSignView}>
-          <TouchableHighlight
-            underlayColor='rgba(0,0,0,0)'
+          <TouchableOpacity
+            activeOpacity={0.6}
             onPress={this.signPhonePressed.bind(this)}>
-            <Text style={styles.afterSignText}>
+            <DText style={styles.afterSignText}>
               Já sou usuário
-            </Text>
-          </TouchableHighlight>
+            </DText>
+          </TouchableOpacity>
         </View>
       </SignBackground>
     )

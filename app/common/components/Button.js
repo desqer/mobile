@@ -7,6 +7,7 @@ import {
   TouchableOpacity
 } from 'react-native'
 
+import DText from 'app/common/components/DText'
 import Variables from 'app/common/stylesheet/Variables'
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -44,9 +45,9 @@ export default class Button extends Component {
         {...this.props}>
         <View style={styles.buttonContent}>
           { icon }
-          <Text style={styles.buttonText}>
+          <DText style={styles.buttonText}>
             { this.props.children }
-          </Text>
+          </DText>
         </View>
       </TouchableOpacity>
     )

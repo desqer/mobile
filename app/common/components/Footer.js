@@ -2,17 +2,17 @@ import React from 'react'
 import { Scene } from 'react-native-router-flux'
 import {
   View,
-  Text,
   StyleSheet,
 } from 'react-native'
 
+import DText from 'app/common/components/DText'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 export const ProfileIcon = ({ selected, title }) => {
   return (
     <View style={styles.tabIcon}>
       <Icon color='#FFF' size={26} name="ios-person-outline" />
-      <Text style={styles.tabText}>{ title }</Text>
+      <DText style={styles.tabText}>{ title }</DText>
     </View>
   )
 }
@@ -37,7 +37,7 @@ export const HistoryIcon = ({ selected, title }) => {
   return (
     <View style={styles.tabIcon}>
       <Icon color='#FFF' size={26} name="ios-bookmarks-outline" />
-      <Text style={styles.tabText}>{ title }</Text>
+      <DText style={styles.tabText}>{ title }</DText>
     </View>
   )
 }
@@ -63,8 +63,7 @@ const styles = StyleSheet.create({
   tabText: {
     alignSelf: 'center',
     color: '#FFF',
-    fontSize: 11,
-    fontFamily: 'Helvetica'
+    fontSize: 11
   },
 
   hexagon: {

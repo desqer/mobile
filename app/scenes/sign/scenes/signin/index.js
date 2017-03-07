@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {
   StyleSheet,
-  Text,
   View,
   TouchableOpacity,
   Image
@@ -10,6 +9,7 @@ import {
 import { connect } from 'react-redux'
 import { Actions, ActionConst } from 'react-native-router-flux'
 
+import DText from 'app/common/components/DText'
 import Input from 'app/common/components/Input'
 import Button from 'app/common/components/Button'
 import SignBackground from 'app/scenes/sign/components/SignBackground'
@@ -41,16 +41,16 @@ class SignIn extends Component {
             />
 
           <View style={styles.userInfo}>
-            <Text
+            <DText
               style={styles.userName}>
               Bem-vindo, Diego
-            </Text>
+            </DText>
             <TouchableOpacity
               activeOpacity={0.6}
               onPress={this.notMePressed.bind(this)}>
-              <Text style={styles.notMeLink}>
+              <DText style={styles.notMeLink}>
                 este não sou eu
-              </Text>
+              </DText>
             </TouchableOpacity>
           </View>
         </View>
@@ -74,9 +74,9 @@ class SignIn extends Component {
           <TouchableOpacity
             activeOpacity={0.6}
             onPress={this.forgotPasswordPressed.bind(this)}>
-            <Text style={styles.afterSignText}>
+            <DText style={styles.afterSignText}>
               Esqueci minha senha
-            </Text>
+            </DText>
           </TouchableOpacity>
         </View>
       </SignBackground>
@@ -107,15 +107,13 @@ const styles = StyleSheet.create({
   userName: {
     fontWeight: '700',
     color: '#666',
-    fontSize: 14,
-    fontFamily: 'Helvetica'
+    fontSize: 14
   },
 
   notMeLink: {
     color: '#E7826A',
     fontSize: 13,
-    marginTop: 5,
-    fontFamily: 'Helvetica'
+    marginTop: 5
   },
 
   afterSignView: {
