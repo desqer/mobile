@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import {
   StyleSheet,
   View,
-  Image,
-  StatusBar
+  Image
 } from 'react-native'
 
 export default class SignBackground extends Component {
@@ -16,8 +15,6 @@ export default class SignBackground extends Component {
       <Image
           style={styles.container}
           source={ require('app/scenes/sign/img/background.png') }>
-
-        <StatusBar hidden />
 
         <View style={styles.logo}>
           <Image
