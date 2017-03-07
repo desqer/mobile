@@ -18,7 +18,7 @@ export default class Header extends NavBar {
     return null
   }
 
-  leftButton() {
+  leftContainer() {
     return (
       <TouchableOpacity
         style={styles.headerAlign}
@@ -29,7 +29,7 @@ export default class Header extends NavBar {
     )
   }
 
-  rightButton() {
+  rightContainer() {
     return (
       <TouchableOpacity
         style={styles.headerAlign}
@@ -47,11 +47,11 @@ export default class Header extends NavBar {
     )
   }
 
-  renderTitle() {
+  render() {
     return (
-      <View style={styles.container} key={1}>
+      <View style={styles.headerContainer} key={1}>
         <StatusBar hidden={false} />
-        { this.leftButton() }
+        { this.leftContainer() }
         <Input
           containerStyle={styles.inputContainer}
           iconContainerStyle={styles.icon}
@@ -62,15 +62,25 @@ export default class Header extends NavBar {
           placeholderTextColor="#AAA"
           placeholder="Buscar um compromisso"
         />
-        { this.rightButton() }
+        { this.rightContainer() }
       </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row'
+  headerContainer: {
+    backgroundColor: '#FFF',
+    shadowColor: "#ddd",
+    shadowOpacity: 1,
+    shadowRadius: 10,
+    paddingTop: 25,
+    paddingHorizontal: 20,
+    paddingBottom: 10,
+    borderBottomWidth: 0,
+    flexDirection: 'row',
+    position: 'absolute',
+    top: 0
   },
 
   headerAlign: {

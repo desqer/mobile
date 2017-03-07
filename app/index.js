@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { StyleSheet } from 'react-native'
 import { Provider, connect } from 'react-redux'
 import { Scene, Router } from 'react-native-router-flux'
 
@@ -65,25 +64,22 @@ export default class Desqer extends Component {
             <Scene key="signUp" component={SignUp} />
             <Scene key="signIn" component={SignIn} />
 
-            <Scene key="app" navBar={Header} navigationBarStyle={styles.navBar}>
+            <Scene key="app" >
               <Scene key="calendar" component={Calendar} initial={true} />
             </Scene>
+            <Scene
+              key="app"
+              tabs={true}
+              tabBarStyle={{ height: 60, backgroundColor: '#BE446D' }}
+
+             >
+               <Scene key="profile" navBar={Header} component={SignPhone} title="Minha conta" icon={ProfileIcon} />
+               <Scene key="calendar" navBar={Header} component={Calendar} icon={DesqerIcon} initial={true} />
+               <Scene key="history" navBar={Header} component={SignUp} title="Histórico" icon={HistoryIcon} />
+             </Scene>
           </Scene>
         </ReduxRouter>
       </Provider>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  navBar: {
-    backgroundColor: '#FFF',
-    shadowColor: "#ddd",
-    shadowOpacity: 1,
-    shadowRadius: 10,
-    paddingTop: 25,
-    paddingHorizontal: 20,
-    paddingBottom: 10,
-    borderBottomWidth: 0
-  }
-});
