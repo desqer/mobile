@@ -54,7 +54,8 @@ export default class IconInput extends Component {
       <View style={[
           styles.inputContainer,
           this.props.containerStyle,
-          (this.props.shadow) ? styles.inputContainerShadow : {}
+          (this.props.shadow) ? styles['inputContainer-shadow'] : {},
+          (this.props.multiline) ? styles['inputContainer-multiline'] : {}
         ]}>
         { icon }
         <TextInput
@@ -79,10 +80,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
 
-  inputContainerShadow: {
+  'inputContainer-shadow': {
     shadowColor: "#BBB",
     shadowOpacity: 0.5,
     shadowRadius: 8,
+  },
+
+  'inputContainer-multiline': {
+    height: 120,
+    paddingVertical: 10
   },
 
   icon: {
