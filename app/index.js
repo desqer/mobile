@@ -41,7 +41,8 @@ import SignUp from 'app/scenes/sign/scenes/signup'
 import SignIn from 'app/scenes/sign/scenes/signin'
 
 import Calendar from 'app/scenes/calendar'
-import Detail from 'app/scenes/event/scenes/detail'
+import Detail from 'app/scenes/calendar/scenes/detail'
+import New from 'app/scenes/calendar/scenes/new'
 
 import Header from 'app/scenes/calendar/components/Header'
 
@@ -64,19 +65,18 @@ export default class Desqer extends Component {
             <Scene key="signUp" component={SignUp} />
             <Scene key="signIn" component={SignIn} />
 
-            <Scene key="app" >
-              <Scene key="calendar" component={Calendar} initial={true} />
-            </Scene>
             <Scene
               key="app"
               tabs={true}
               tabBarStyle={{ height: 60, backgroundColor: '#BE446D' }}
-
-             >
-               <Scene key="profile" navBar={Header} component={SignPhone} title="Minha conta" icon={ProfileIcon} />
-               <Scene key="calendar" navBar={Header} component={Calendar} icon={DesqerIcon} initial={true} />
-               <Scene key="history" navBar={Header} component={SignUp} title="Histórico" icon={HistoryIcon} />
-             </Scene>
+            >
+              <Scene key="profile" navBar={Header} component={SignPhone} title="Minha conta" icon={ProfileIcon} />
+              <Scene key="appointments" navBar={Header} icon={DesqerIcon} initial={true}>
+                <Scene key="calendar" component={Calendar} />
+                <Scene key="new" component={New} initial={true} title="Criar serviço" />
+              </Scene>
+              <Scene key="history" navBar={Header} component={SignUp} title="Histórico" icon={HistoryIcon} />
+            </Scene>
           </Scene>
         </ReduxRouter>
       </Provider>

@@ -8,14 +8,23 @@ import {
   StatusBar
 } from 'react-native'
 
+import Actions from 'react-native-router-flux'
+
 import Input from 'app/common/components/Input'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { NavBar } from 'react-native-router-flux'
 
 export default class Header extends NavBar {
-  renderBackButton() {
-    //Todo:: create render for back-enabled scenes
-    return null
+  backButton() {
+    return (
+      <TouchableOpacity
+        style={styles.headerAlign}
+        activeOpacity={0.6}
+        onPress={() => Actions.pop()}
+      >
+        <Icon size={18} color='#999' name="ios-arrow-back" />
+      </TouchableOpacity>
+    )
   }
 
   leftContainer() {
@@ -47,11 +56,11 @@ export default class Header extends NavBar {
     )
   }
 
-  render() {
-    return (
-      <View style={styles.headerContainer} key={1}>
-        <StatusBar hidden={false} />
-        { this.leftContainer() }
+  titleContainer() {
+    if (this.props.title) {
+      return <Text style={styles.titleContainer}>{ this.props.title }</Text>
+    } else {
+      return (
         <Input
           containerStyle={styles.inputContainer}
           iconContainerStyle={styles.icon}
@@ -62,6 +71,18 @@ export default class Header extends NavBar {
           placeholderTextColor="#AAA"
           placeholder="Buscar um compromisso"
         />
+      )
+    }
+  }
+
+  render() {
+    console.log(this.props.navigationState)
+    return (
+      <View style={styles.headerContainer} key={1}>
+        <StatusBar hidden={false} />
+        { this.backButton() }
+        { this.leftContainer() }
+        { this.titleContainer() }
         { this.rightContainer() }
       </View>
     )
@@ -96,6 +117,15 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     flex: 1,
     marginTop: 0
+  },
+
+  titleContainer: {
+    flex: 1,
+    lineHeight: 30,
+    textAlign: 'center',
+    color: '#333',
+    fontWeight: 'bold',
+    fontFamily: 'Helvetica'
   },
 
   icon: {

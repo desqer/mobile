@@ -20,7 +20,7 @@ class SignIn extends Component {
   }
 
   signUpPressed() {
-    Actions.app() 
+    Actions.app()
   }
 
   notMePressed() {

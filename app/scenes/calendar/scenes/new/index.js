@@ -5,16 +5,14 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import Footer from 'app/common/components/Footer'
+import Container from 'app/common/components/Container'
 
-export default class Detail extends Component {
+export default class New extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.contentContainer}>
-
-        </View>
-      </View>
+      <Container>
+        <Text>Hello World</Text>
+      </Container>
     );
   }
 }
@@ -26,6 +24,7 @@ const styles = StyleSheet.create({
   },
 
   contentContainer: {
-    flex: 1
+    flex: 1,
+    paddingTop: 65
   },
 });
