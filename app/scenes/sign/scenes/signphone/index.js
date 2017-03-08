@@ -20,21 +20,21 @@ class SignPhone extends Component {
   render() {
     return (
       <SignBackground>
-          <View>
-            <Input
-              placeholder='Digite seu telefone'
-              autoCapitalize='none'
-              icon='ios-call-outline'
-              keyboardType='numeric'
-              ref={component => this._textInput = component} />
+        <View>
+          <Input
+            placeholder='Digite seu telefone'
+            autoCapitalize='none'
+            icon='ios-call-outline'
+            keyboardType='numeric'
+            ref={component => this._textInput = component} />
 
-            <Button
-              size="large"
-              color="primary"
-              onPress={this.signUpPressed.bind(this)}>
-              Avançar
-            </Button>
-          </View>
+          <Button
+            size="large"
+            color="primary"
+            onPress={this.signUpPressed.bind(this)}>
+            Avançar
+          </Button>
+        </View>
       </SignBackground>
     )
   }

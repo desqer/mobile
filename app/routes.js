@@ -42,8 +42,8 @@ const scenes = Actions.create(
     >
       <Scene key="profile" navBar={Header} component={SignPhone} title="Minha conta" icon={ProfileIcon} />
       <Scene key="appointments" navBar={Header} icon={DesqerIcon} initial={true}>
-        <Scene key="calendar" component={Calendar} />
-        <Scene key="new" component={New} initial={true} title="Criar serviço" />
+        <Scene key="calendar" component={Calendar} initial={true} />
+        <Scene key="new" component={New} title="Criar serviço" />
       </Scene>
       <Scene key="history" navBar={Header} component={SignUp} title="Histórico" icon={HistoryIcon} />
     </Scene>

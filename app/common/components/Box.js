@@ -21,7 +21,7 @@ export default class Box extends Component {
     return (
       <ContainerElement
         activeOpacity={0.6}
-        style={styles.boxContainer}
+        style={[styles.boxContainer, this.props.boxStyle]}
         {...this.props}>
 
         <View style={styles.contentContainer}>
