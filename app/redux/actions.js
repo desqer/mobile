@@ -1,5 +1,5 @@
-import * as SignActions from 'app/scenes/sign/redux/actions'
+import * as SignPhoneActions from 'app/scenes/sign/scenes/signphone/actions'
 
 export const ActionCreators = Object.assign({},
-  SignActions,
+  SignPhoneActions,
 );
