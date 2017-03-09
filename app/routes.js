@@ -40,10 +40,13 @@ const scenes = Actions.create(
       tabs={true}
       tabBarStyle={{ height: 60, backgroundColor: '#BE446D' }}
     >
-      <Scene key="profile" navBar={Header} component={SignPhone} title="Minha conta" icon={ProfileIcon} />
-      <Scene key="appointments" navBar={Header} icon={DesqerIcon} initial={true}>
-        <Scene key="calendar" component={Calendar} initial={true} />
-        <Scene key="new" component={New} title="Criar serviço" />
+      <Scene key="profile" navBar={Header} component={New} title="Minha conta" icon={ProfileIcon} />
+      <Scene key="appointments" navBar={Header} icon={DesqerIcon}>
+        <Scene key="calendarIndex" component={Calendar} />
+        <Scene key="calendar" navBar={Header}>
+          <Scene key="show" component={New} title="Detalhe do evento" />
+        </Scene>
+        <Scene key="newAppointment" component={New} title="Criar serviço" />
       </Scene>
       <Scene key="history" navBar={Header} component={SignUp} title="Histórico" icon={HistoryIcon} />
     </Scene>

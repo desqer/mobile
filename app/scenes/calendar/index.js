@@ -9,6 +9,7 @@ import {
   ActivityIndicatorIOS
 } from 'react-native'
 
+import { Actions } from 'react-native-router-flux'
 import DText from 'app/common/components/DText'
 import Event from 'app/scenes/calendar/components/Event'
 
@@ -39,10 +40,8 @@ export default class Calendar extends Component {
   }
 
   handleEventPressed() {
-    this.props.navigator.push({
-      id: 'event.detail',
-      reset: true
-    })
+    Actions.calendar()
+    Actions.show()
   }
 
   componentDidMount() {

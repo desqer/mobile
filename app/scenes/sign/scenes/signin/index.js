@@ -20,7 +20,9 @@ class SignIn extends Component {
   }
 
   signUpPressed() {
-    Actions.app()
+      Actions.app({ type: ActionConst.RESET })
+      Actions.appointments()
+      Actions.calendarIndex()
   }
 
   notMePressed() {

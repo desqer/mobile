@@ -7,17 +7,21 @@ import {
   StatusBar
 } from 'react-native'
 
-import Actions from 'react-native-router-flux'
 import DText from 'app/common/components/DText'
 import Input from 'app/common/components/Input'
 import Icon from 'react-native-vector-icons/Ionicons'
-import { NavBar } from 'react-native-router-flux'
+import { NavBar, Actions } from 'react-native-router-flux'
 
 export default class Header extends NavBar {
+  constructor(props) {
+    super(props)
+    this.backButtonDisabled = ['profile', 'appointments', 'history']
+  }
+
   backButton() {
     return (
       <TouchableOpacity
-        style={styles.headerAlign}
+        style={[styles.headerAlign, styles.leftButton]}
         activeOpacity={0.6}
         onPress={() => Actions.pop()}
       >
@@ -26,21 +30,10 @@ export default class Header extends NavBar {
     )
   }
 
-  leftContainer() {
-    return (
-      <TouchableOpacity
-        style={styles.headerAlign}
-        activeOpacity={0.6}
-      >
-        <Icon name='ios-swap' size={18} color="#999" />
-      </TouchableOpacity>
-    )
-  }
-
   rightContainer() {
     return (
       <TouchableOpacity
-        style={styles.headerAlign}
+        style={[styles.headerAlign, styles.rightButton]}
         activeOpacity={0.6}
       >
         <View style={styles.notificationContainer}>
@@ -75,14 +68,12 @@ export default class Header extends NavBar {
   }
 
   render() {
-    console.log(this.props.navigationState)
     return (
       <View style={styles.headerContainer} key={1}>
         <StatusBar hidden={false} />
-        { this.backButton() }
-        { this.leftContainer() }
+        { !(this.props.navigationState.parent == 'app') && this.backButton() }
         { this.titleContainer() }
-        { this.rightContainer() }
+        { (this.props.navigationState.name == 'appointments') && this.rightContainer() }
       </View>
     )
   }
@@ -95,7 +86,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 10,
     paddingTop: 25,
-    paddingHorizontal: 20,
+    paddingHorizontal: 15,
     paddingBottom: 10,
     borderBottomWidth: 0,
     flexDirection: 'row',
@@ -107,13 +98,22 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
 
+  rightButton: {
+    alignSelf: 'center',
+    marginLeft: 15
+  },
+
+  leftButton: {
+    alignSelf: 'center',
+    marginRight: 15
+  },
+
   inputContainer: {
     height: 30,
     backgroundColor: '#F5F5F5',
     borderRadius: 3,
     paddingLeft: 15,
     flexDirection: 'row',
-    marginHorizontal: 15,
     flex: 1,
     marginTop: 0
   },
