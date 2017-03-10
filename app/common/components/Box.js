@@ -34,6 +34,10 @@ export default class Box extends Component {
   }
 }
 
+Box.propTypes = {
+  children: React.PropTypes.element.isRequired
+}
+
 const styles = new StyleSheet.create({
   boxContainer: {
     backgroundColor: '#FFF',

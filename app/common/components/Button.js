@@ -54,6 +54,12 @@ export default class Button extends Component {
   }
 }
 
+Button.propTypes = {
+  size: React.PropTypes.string,
+  type: React.PropTypes.string,
+  color: React.PropTypes.string
+}
+
 const styles = StyleSheet.create({
   button: {
     height: 40,

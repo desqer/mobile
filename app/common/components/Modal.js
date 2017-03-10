@@ -21,6 +21,10 @@ export default class Modal extends Component {
   }
 }
 
+Modal.propTypes = {
+  children: React.PropTypes.element.isRequired
+}
+
 const styles = StyleSheet.create({
   modalOverlay: {
     position: 'absolute',

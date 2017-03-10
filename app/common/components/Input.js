@@ -10,7 +10,7 @@ import {
 import DText from 'app/common/components/DText'
 import Icon from 'react-native-vector-icons/Ionicons';
 
-export default class IconInput extends Component {
+export default class Input extends Component {
   constructor(props) {
     super(props)
     this.focus = this.focus.bind(this)
@@ -69,6 +69,13 @@ export default class IconInput extends Component {
       </View>
     );
   }
+}
+
+Input.propTypes = {
+  icon: React.PropTypes.string,
+  shadow: React.PropTypes.bool,
+  optional: React.PropTypes.bool,
+  multiline: React.PropTypes.bool
 }
 
 const styles = StyleSheet.create({

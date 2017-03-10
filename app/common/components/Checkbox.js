@@ -47,6 +47,10 @@ export default class Checkbox extends Component {
     }
 }
 
+Checkbox.propTypes = {
+  label: React.PropTypes.string
+}
+
 const styles = StyleSheet.create({
     checkBoxContainer: {
       flexDirection: 'row'
