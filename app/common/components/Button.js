@@ -4,7 +4,8 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator
 } from 'react-native'
 
 import DText from 'app/common/components/DText'
@@ -13,13 +14,14 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class Button extends Component {
   constructor(props) {
-    super(props);
+    super(props)
   }
 
-  render() {
-    /**
-     * Render icon
-     */
+  renderLoadingContent() {
+    return <ActivityIndicator color="white" />
+  }
+
+  renderButtonContent() {
     let icon = null;
     if (this.props.icon) {
       icon = (
@@ -28,10 +30,21 @@ export default class Button extends Component {
           name={this.props.icon}
           size={this.props.iconSize || 16}
           color={this.props.iconColor || '#FFF'}
-          />
+        />
       )
     }
 
+    return (
+      <View>
+        { icon }
+        <DText style={styles.buttonText}>
+          { this.props.children }
+        </DText>
+      </View>
+    )
+  }
+
+  render() {
     return (
       <TouchableOpacity
         activeOpacity={0.9}
@@ -44,10 +57,7 @@ export default class Button extends Component {
         ]}
         {...this.props}>
         <View style={styles.buttonContent}>
-          { icon }
-          <DText style={styles.buttonText}>
-            { this.props.children }
-          </DText>
+          { this.props.loading ? this.renderLoadingContent() : this.renderButtonContent() }
         </View>
       </TouchableOpacity>
     )
