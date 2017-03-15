@@ -1,9 +1,12 @@
+import Device from 'react-native-device-info'
+
 export default class Api {
   static headers() {
     return {
-      'Accept':       'application/json',
-      'Content-Type': 'application/json',
-      'dataType':     'json'
+      'Accept-Locale': Device.getDeviceLocale(),
+      'Accept':        'application/json',
+      'Content-Type':  'application/json',
+      'dataType':      'json',
     }
   }
 
@@ -26,8 +29,6 @@ export default class Api {
   static xhr(route, params, verb) {
     const host = 'http://api.desqer.com'
     const url = `${host}${route}`
-
-    console.log(url)
 
     let options = Object.assign({
       method: verb
