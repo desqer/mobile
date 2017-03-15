@@ -13,25 +13,40 @@ import Icon from 'react-native-vector-icons/Ionicons';
 export default class Input extends Component {
   constructor(props) {
     super(props)
-    this.focus = this.focus.bind(this)
+
+    this.state = {
+      placeholder: this.defaultPlaceholder = {
+        text:  'Qual o nº do seu celular?',
+        color: '#666'
+      }
+    }
   }
 
   focus() {
     this._textInput.focus();
   }
 
-  render() {
+  setPlaceholderText(setToDefault = false) {
+    this.setState(() => {
+      return {
+        placeholder: (setToDefault)
+          ? this.defaultPlaceholder
+          : {
+            text: this.props.placeholderFocusText || this.defaultPlaceholder.text,
+            color: '#999'
+          }
+      }
+    })
+  }
 
-    /**
-    * Render icon
-    */
+  leftContainer() {
     let icon = null;
     if (this.props.icon) {
       icon = (
         <TouchableOpacity
           activeOpacity={1}
           style={[styles.icon, this.props.iconContainerStyle]}
-          onPress={this.focus}>
+          onPress={this.focus.bind(this)}>
 
           <Icon
             name={this.props.icon}
@@ -42,14 +57,19 @@ export default class Input extends Component {
       )
     }
 
-    /**
-    * Render optional
-    */
+    return icon
+  }
+
+  rightContainer() {
     let optional = null;
     if (this.props.optional === true) {
       optional = <DText style={styles.optional}>opcional</DText>
     }
 
+    return optional
+  }
+
+  render() {
     return (
       <View style={[
           styles.inputContainer,
@@ -57,15 +77,18 @@ export default class Input extends Component {
           (this.props.shadow) ? styles['inputContainer-shadow'] : {},
           (this.props.multiline) ? styles['inputContainer-multiline'] : {}
         ]}>
-        { icon }
+        { this.leftContainer() }
         <TextInput
           underlineColorAndroid='rgba(0,0,0,0)'
           ref={input => this._textInput = input}
           style={[styles.input, this.props.inputStyle]}
-          placeholderTextColor="#666"
+          placeholder={this.state.placeholder.text}
+          placeholderTextColor={this.state.placeholder.color}
+          onFocus={() => this.setPlaceholderText()}
+          onBlur={() => this.setPlaceholderText(true)}
           {...this.props}
           />
-        { optional }
+        { this.rightContainer() }
       </View>
     );
   }
@@ -75,7 +98,9 @@ Input.propTypes = {
   icon: React.PropTypes.string,
   shadow: React.PropTypes.bool,
   optional: React.PropTypes.bool,
-  multiline: React.PropTypes.bool
+  multiline: React.PropTypes.bool,
+  placeholderText: React.PropTypes.string,
+  placeholderFocusText: React.PropTypes.string
 }
 
 const styles = StyleSheet.create({
