@@ -16,6 +16,7 @@ export default class Container extends Component {
 
 const styles = StyleSheet.create({
   text: {
-    fontFamily: 'Helvetica'
+    fontFamily: 'Helvetica',
+    backgroundColor: 'transparent'
   }
 });

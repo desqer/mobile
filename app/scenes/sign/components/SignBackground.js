@@ -32,12 +32,7 @@ export default class SignBackground extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    width: undefined,
-    height: undefined,
-    flexDirection: 'column',
     alignItems: 'center',
-    backgroundColor: 'transparent',
     padding: 20
   },
 
@@ -53,7 +48,6 @@ const styles = StyleSheet.create({
 
   form: {
     flex: 3,
-    flexDirection: 'column',
     alignSelf: 'stretch'
   }
 })
