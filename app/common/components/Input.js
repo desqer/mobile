@@ -15,6 +15,7 @@ export default class Input extends Component {
     super(props)
 
     this.state = {
+      validationPassed: false,
       placeholder: this.defaultPlaceholder = {
         text:  'Qual o nº do seu celular?',
         color: '#666'
@@ -36,6 +37,24 @@ export default class Input extends Component {
             color: '#999'
           }
       }
+    })
+  }
+
+  validateInput(text) {
+    if (this.props.required && !text.length) {
+      return this.setState(() => {
+        return { validationPassed: false }
+      })
+    }
+
+    if (this.props.requiredRegex && !this.props.requiredRegex.test(text)) {
+      return this.setState(() => {
+        return { validationPassed: false }
+      })
+    }
+
+    return this.setState(() => {
+      return { validationPassed: true }
     })
   }
 
@@ -61,34 +80,52 @@ export default class Input extends Component {
   }
 
   rightContainer() {
-    let optional = null;
-    if (this.props.optional === true) {
-      optional = <DText style={styles.optional}>opcional</DText>
+    let rightContainer;
+    if (!this.props.required) {
+      rightContainer = <DText style={styles.optional}>opcional</DText>
+    } else {
+      if (this.state.validationPassed === true) {
+        rightContainer = <Icon name="ios-checkmark" size={32} color="#666" />
+      }
     }
 
-    return optional
+    return rightContainer
   }
 
   render() {
     return (
       <View style={[
-          styles.inputContainer,
-          this.props.containerStyle,
-          (this.props.shadow) ? styles['inputContainer-shadow'] : {},
-          (this.props.multiline) ? styles['inputContainer-multiline'] : {}
-        ]}>
+        styles.inputContainer,
+        this.props.containerStyle,
+        (this.props.shadow) ? styles['inputContainer-shadow'] : {},
+        (this.props.multiline) ? styles['inputContainer-multiline'] : {}
+      ]}>
         { this.leftContainer() }
         <TextInput
           underlineColorAndroid='rgba(0,0,0,0)'
           ref={input => this._textInput = input}
-          style={[styles.input, this.props.inputStyle]}
           placeholder={this.state.placeholder.text}
           placeholderTextColor={this.state.placeholder.color}
-          onFocus={() => this.setPlaceholderText()}
-          onBlur={() => this.setPlaceholderText(true)}
+
           {...this.props}
-          />
-        { this.rightContainer() }
+          style={[styles.input, this.props.style]}
+          onChangeText={(text) => {
+            this.validateInput(text);
+            (this.props.onChangeText) ? this.props.onChangeText(text) : null
+          }}
+          style={[styles.input, this.props.style]}
+          onBlur={() => {
+            this.setPlaceholderText(true);
+            (this.props.onBlur) ? this.props.onBlur() : null
+          }}
+          onFocus={() => {
+            this.setPlaceholderText();
+            (this.props.onFocus) ? this.props.onFocus() : null
+          }}
+        />
+        <View style={styles.rightContainer}>
+          { this.rightContainer() }
+        </View>
       </View>
     );
   }
@@ -128,9 +165,12 @@ const styles = StyleSheet.create({
     paddingLeft: 20
   },
 
-  optional: {
+  rightContainer: {
     alignSelf: 'center',
-    paddingRight: 20,
+    paddingRight: 20
+  },
+
+  optional: {
     fontSize: 11,
     color: '#999'
   },
