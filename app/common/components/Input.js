@@ -64,7 +64,7 @@ export default class Input extends Component {
       icon = (
         <TouchableOpacity
           activeOpacity={1}
-          style={[styles.icon, this.props.iconContainerStyle]}
+          style={[this.props.iconContainerStyle]}
           onPress={this.focus.bind(this)}>
 
           <Icon
@@ -100,7 +100,9 @@ export default class Input extends Component {
         (this.props.shadow) ? styles['inputContainer-shadow'] : {},
         (this.props.multiline) ? styles['inputContainer-multiline'] : {}
       ]}>
-        { this.leftContainer() }
+        <View style={styles.leftContainer}>
+          { this.leftContainer() }
+        </View>
         <TextInput
           underlineColorAndroid='rgba(0,0,0,0)'
           ref={input => this._textInput = input}
@@ -160,7 +162,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10
   },
 
-  icon: {
+  leftContainer: {
     alignSelf: 'center',
     paddingLeft: 20
   },
