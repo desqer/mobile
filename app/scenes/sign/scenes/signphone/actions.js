@@ -1,7 +1,15 @@
 import * as types from './types'
 
+import Api from 'app/common/lib/Api'
+
 export function fetchUserByPhone(phoneNumber) {
   return (dispatch, getState) => {
+    return Api.get(`/users/${phoneNumber}`).then(resp => {
+      console.log(resp)
+    }).catch( (ex) => {
+      console.log(ex)
+    })
+
     dispatch(setUser({
       user: {
         id: 1,
