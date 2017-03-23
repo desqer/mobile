@@ -4,6 +4,7 @@ import {
   View
 } from 'react-native'
 
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Actions, ActionConst } from 'react-native-router-flux'
 
@@ -11,7 +12,16 @@ import Input from 'app/common/components/Input'
 import Button from 'app/common/components/Button'
 import SignBackground from 'app/scenes/sign/components/SignBackground'
 
-class SignPhone extends Component {
+import * as SignPhoneActions from 'app/scenes/sign/scenes/signphone/actions'
+
+function mapStateToProps(state) {
+  return {
+    signUser: state.signUser
+  }
+}
+
+@connect(mapStateToProps, (dispatch) => bindActionCreators(SignPhoneActions, dispatch))
+export default class SignPhone extends Component {
   constructor(props) {
     super(props)
 
@@ -28,7 +38,7 @@ class SignPhone extends Component {
       this.props.fetchUserByPhone(this.state.phone).then(() => {
         this.setState(() => { return { loading: false } })
 
-        Actions.signUp({ type: ActionConst.REPLACE })
+        this.props.navigation.navigate('SignUp')
       })
     } else {
       this._signPhoneInput.focus()
@@ -46,9 +56,7 @@ class SignPhone extends Component {
             keyboardType='numeric'
             ref={component => this._signPhoneInput = component}
             onChangeText={(phone) => this.setState({phone})}
-
             required={true}
-            requiredRegex={/[0-9]{3,}/}
           />
 
           <Button
@@ -64,11 +72,3 @@ class SignPhone extends Component {
     )
   }
 }
-
-function mapStateToProps(state) {
-  return {
-    signUser: state.signUser
-  };
-}
-
-export default connect(mapStateToProps)(SignPhone)

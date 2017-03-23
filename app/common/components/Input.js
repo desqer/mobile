@@ -81,11 +81,13 @@ export default class Input extends Component {
 
   rightContainer() {
     let rightContainer;
-    if (!this.props.required) {
-      rightContainer = <DText style={styles.optional}>opcional</DText>
-    } else {
-      if (this.state.validationPassed === true) {
-        rightContainer = <Icon name="ios-checkmark" size={32} color="#666" />
+    if (this.props.hasOwnProperty('required')) {
+      if (this.props.required === false) {
+        rightContainer = <DText style={styles.optional}>opcional</DText>
+      } else {
+        if (this.state.validationPassed === true) {
+          rightContainer = <Icon name="ios-checkmark" size={32} color="#666" />
+        }
       }
     }
 

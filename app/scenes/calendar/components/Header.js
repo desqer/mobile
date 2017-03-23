@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {
   View,
   StyleSheet,
@@ -7,18 +7,16 @@ import {
   StatusBar
 } from 'react-native'
 
+import { connect } from 'react-redux'
+
 import DText from 'app/common/components/DText'
 import Input from 'app/common/components/Input'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { NavBar, Actions } from 'react-native-router-flux'
 
-export default class Header extends NavBar {
-  constructor(props) {
-    super(props)
-    this.backButtonDisabled = ['profile', 'appointments', 'history']
-  }
+class Header extends Component {
 
-  backButton() {
+  static left(state) {
     return (
       <TouchableOpacity
         style={[styles.headerAlign, styles.leftButton]}
@@ -30,7 +28,7 @@ export default class Header extends NavBar {
     )
   }
 
-  rightContainer() {
+  static right(state) {
     return (
       <TouchableOpacity
         style={[styles.headerAlign, styles.rightButton]}
@@ -41,40 +39,26 @@ export default class Header extends NavBar {
             <DText style={styles.notificationText}>
               3
             </DText>
-          </View>
+        </View>
           <Icon style={styles.headerAlign} name='ios-notifications-outline' size={18} color="#999" />
         </View>
       </TouchableOpacity>
     )
   }
 
-  titleContainer() {
-    if (this.props.title) {
-      return <DText style={styles.titleContainer}>{ this.props.title }</DText>
-    } else {
-      return (
-        <Input
-          containerStyle={styles.inputContainer}
-          iconContainerStyle={styles.icon}
-          inputStyle={[styles.input]}
-          icon='ios-search'
-          iconSize={16}
-          iconColor="#AAA"
-          placeholderTextColor="#AAA"
-          placeholder="Buscar um compromisso"
-        />
-      )
-    }
-  }
-
-  render() {
+  static title(state) {
+    console.log(state);
     return (
-      <View style={styles.headerContainer} key={1}>
-        <StatusBar hidden={false} />
-        { !(this.props.navigationState.parent == 'app') && this.backButton() }
-        { this.titleContainer() }
-        { (this.props.navigationState.name == 'appointments') && this.rightContainer() }
-      </View>
+      <Input
+        containerStyle={styles.inputContainer}
+        iconContainerStyle={styles.icon}
+        inputStyle={[styles.input]}
+        icon='ios-search'
+        iconSize={16}
+        iconColor="#AAA"
+        placeholderTextColor="#AAA"
+        placeholder="Buscar um compromisso"
+      />
     )
   }
 }
@@ -123,7 +107,8 @@ const styles = StyleSheet.create({
     lineHeight: 30,
     textAlign: 'center',
     color: '#333',
-    fontWeight: 'bold',  },
+    fontWeight: 'bold',
+},
 
   icon: {
     alignSelf: 'center',
@@ -156,4 +141,6 @@ const styles = StyleSheet.create({
     color: '#FFF',
     textAlign: 'center'
   }
-});
+})
+
+export default connect((state) => { return { nav: state.nav } })(Header)
