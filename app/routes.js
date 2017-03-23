@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
+
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { StackNavigator, addNavigationHelpers } from 'react-navigation'
-
 import { ActionCreators } from 'app/redux/actions'
 
 /**
@@ -15,15 +16,6 @@ import SignIn from 'app/scenes/sign/scenes/signin'
 import Calendar from 'app/scenes/calendar'
 import Detail from 'app/scenes/calendar/scenes/detail'
 import New from 'app/scenes/calendar/scenes/new'
-
-/**
- * Tab icons
- */
-import {
-  ProfileIcon,
-  DesqerIcon,
-  HistoryIcon
-} from 'app/common/components/Footer'
 
 export const Routes = StackNavigator({
   SignPhone: {
@@ -45,8 +37,8 @@ export const Routes = StackNavigator({
     }
   }
 }, {
-  initialRouteName: 'SignPhone',
   headerMode: 'screen',
+  initialRouteName: 'SignPhone',
   navigationOptions: {
     header: ({ state }) => ({
       left: Header.left(state),
@@ -73,14 +65,28 @@ export const Routes = StackNavigator({
 class Router extends Component {
   render() {
     return (
-      <Routes navigation={addNavigationHelpers({
-        dispatch: this.props.dispatch,
-        state:    this.props.nav,
-      })} />
+      <Routes
+        teste={true}
+        screenProps = {{
+          ...bindActionCreators(ActionCreators, this.props.dispatch)
+        }}
+        navigation={
+          addNavigationHelpers({
+            state: this.props.nav,
+            dispatch: this.props.dispatch
+          })
+        }
+      />
     );
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    nav: state.nav
+  }
+}
+
 export default connect(
-  (state) => { return { nav: state.nav } }
+  mapStateToProps
 )(Router)

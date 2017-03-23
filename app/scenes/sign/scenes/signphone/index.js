@@ -4,14 +4,14 @@ import {
   View
 } from 'react-native'
 
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+
+import { bindActionCreators } from 'redux'
+import * as Actions from './actions'
 
 import Input from 'app/common/components/Input'
 import Button from 'app/common/components/Button'
 import SignBackground from 'app/scenes/sign/components/SignBackground'
-
-import * as SignPhoneActions from 'app/scenes/sign/scenes/signphone/actions'
 
 function mapStateToProps(state) {
   return {
@@ -19,10 +19,12 @@ function mapStateToProps(state) {
   }
 }
 
-@connect(mapStateToProps, (dispatch) => bindActionCreators(SignPhoneActions, dispatch))
+@connect(mapStateToProps, (dispatch) => bindActionCreators(Actions, dispatch))
 export default class SignPhone extends Component {
   constructor(props) {
     super(props)
+
+    console.log(this.props)
 
     this.state = {
       phone: '',
@@ -34,7 +36,7 @@ export default class SignPhone extends Component {
     if (this.state.phone) {
       this.setState(() => { return { loading: true } })
 
-      this.props.fetchUserByPhone(this.state.phone).then(() => {
+      this.props.navigation.fetchUserByPhone(`55${this.state.phone}`).then(() => {
         this.setState(() => { return { loading: false } })
 
         this.props.navigation.navigate('SignUp')

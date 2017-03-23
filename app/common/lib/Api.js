@@ -30,6 +30,8 @@ export default class Api {
     const host = 'http://api.desqer.com'
     const url = `${host}${route}`
 
+    console.log(url)
+
     let options = Object.assign({
       method: verb
     }, params ? {
