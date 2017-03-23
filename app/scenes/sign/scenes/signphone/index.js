@@ -6,7 +6,6 @@ import {
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Actions, ActionConst } from 'react-native-router-flux'
 
 import Input from 'app/common/components/Input'
 import Button from 'app/common/components/Button'

@@ -7,7 +7,6 @@ import {
 } from 'react-native'
 
 import { connect } from 'react-redux'
-import { Actions, ActionConst } from 'react-native-router-flux'
 
 import DText from 'app/common/components/DText'
 import Input from 'app/common/components/Input'
@@ -20,13 +19,13 @@ class SignIn extends Component {
   }
 
   signUpPressed() {
-      Actions.app({ type: ActionConst.RESET })
-      Actions.appointments()
-      Actions.calendarIndex()
+      // Actions.app({ type: ActionConst.RESET })
+      // Actions.appointments()
+      // Actions.calendarIndex()
   }
 
   notMePressed() {
-    Actions.signUp({ type: ActionConst.REPLACE })
+    // Actions.signUp({ type: ActionConst.REPLACE })
   }
 
   forgotPasswordPressed() {

@@ -9,7 +9,6 @@ import {
 } from 'react-native'
 
 import { connect } from 'react-redux'
-import { Actions, ActionConst } from 'react-native-router-flux'
 
 import DText from 'app/common/components/DText'
 import Input from 'app/common/components/Input'
@@ -22,11 +21,11 @@ class SignUp extends Component {
   }
 
   signUpPressed() {
-    Actions.signIn({ type: ActionConst.REPLACE })
+    // Actions.signIn({ type: ActionConst.REPLACE })
   }
 
   signPhonePressed() {
-    Actions.signPhone({ type: ActionConst.REPLACE })
+    // Actions.signPhone({ type: ActionConst.REPLACE })
   }
 
   render() {

@@ -12,7 +12,6 @@ import { connect } from 'react-redux'
 import DText from 'app/common/components/DText'
 import Input from 'app/common/components/Input'
 import Icon from 'react-native-vector-icons/Ionicons'
-import { NavBar, Actions } from 'react-native-router-flux'
 
 class Header extends Component {
 
