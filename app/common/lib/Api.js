@@ -30,8 +30,6 @@ export default class Api {
     const host = 'http://api.desqer.com'
     const url = `${host}${route}`
 
-    console.log(url)
-
     let options = Object.assign({
       method: verb
     }, params ? {
@@ -40,13 +38,18 @@ export default class Api {
 
     options.headers = Api.headers()
     return fetch(url, options).then(resp => {
-      let json = resp.json();
+      let json = resp.json()
       if (resp.ok) {
         return json
       }
       return json.then(err => {
-        throw err
+        throw {
+          code: resp.status,
+          data: err
+        }
       });
-    }).then(json => json.results);
+    }).then(json => {
+      return json
+    });
   }
 }

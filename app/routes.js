@@ -35,6 +35,9 @@ export const Routes = StackNavigator({
     navigationOptions: {
       header: { visible: false }
     }
+  },
+  Calendar: {
+    screen: Calendar
   }
 }, {
   headerMode: 'screen',
@@ -81,12 +84,4 @@ class Router extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    nav: state.nav
-  }
-}
-
-export default connect(
-  mapStateToProps
-)(Router)
+export default connect((state) => { return { nav: state.nav } })(Router)

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 
 import { Routes } from 'app/routes'
-import * as signPhoneReducer from 'app/scenes/sign/scenes/signphone/reducers'
+import * as globalReducers from 'app/common/redux/reducers'
 
 const navReducer = (state, action) => {
   const newState = Routes.router.getStateForAction(action, state)
@@ -10,5 +10,5 @@ const navReducer = (state, action) => {
 
 export default combineReducers(Object.assign(
   { nav: navReducer },
-  signPhoneReducer,
+  globalReducers
 ))

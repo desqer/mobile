@@ -16,6 +16,10 @@ import SignBackground from 'app/scenes/sign/components/SignBackground'
 class SignIn extends Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      user: this.props.navigation.state.params.user
+    }
   }
 
   signUpPressed() {
@@ -25,7 +29,7 @@ class SignIn extends Component {
   }
 
   notMePressed() {
-    // Actions.signUp({ type: ActionConst.REPLACE })
+    this.props.navigation.goBack()
   }
 
   forgotPasswordPressed() {
@@ -36,15 +40,10 @@ class SignIn extends Component {
     return (
       <SignBackground>
         <View style={styles.userContainer}>
-          <Image
-            style={styles.userAvatar}
-            source={{uri: 'https://tinyfac.es/data/avatars/5F8C5D50-DDB6-4F06-AA15-ACB30D8D910D-500w.jpeg'}}
-            />
-
           <View style={styles.userInfo}>
             <DText
               style={styles.userName}>
-              Bem-vindo, Diego
+              Bem-vindo, { this.state.user.name }
             </DText>
             <TouchableOpacity
               activeOpacity={0.6}
@@ -101,7 +100,6 @@ const styles = StyleSheet.create({
   },
 
   userInfo: {
-    marginLeft: 15,
     alignSelf: 'center'
   },
 
