@@ -7,15 +7,17 @@ import {
   StyleSheet,
 } from 'react-native';
 
+import { connect } from 'react-redux'
+
 import DText from 'app/common/components/DText'
 import Icon from 'react-native-vector-icons/Ionicons';
 
+@connect((state) => { return { errors: state.errors } })
 export default class Input extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      validationPassed: false,
       placeholder: this.defaultPlaceholder = {
         text:  'Qual o nº do seu celular?',
         color: '#666'
@@ -37,24 +39,6 @@ export default class Input extends Component {
             color: '#999'
           }
       }
-    })
-  }
-
-  validateInput(text) {
-    if (this.props.required && !text.length) {
-      return this.setState(() => {
-        return { validationPassed: false }
-      })
-    }
-
-    if (this.props.requiredRegex && !this.props.requiredRegex.test(text)) {
-      return this.setState(() => {
-        return { validationPassed: false }
-      })
-    }
-
-    return this.setState(() => {
-      return { validationPassed: true }
     })
   }
 
@@ -81,13 +65,12 @@ export default class Input extends Component {
 
   rightContainer() {
     let rightContainer;
-    if (this.props.hasOwnProperty('required')) {
-      if (this.props.required === false) {
-        rightContainer = <DText style={styles.optional}>opcional</DText>
-      } else {
-        if (this.state.validationPassed === true) {
-          rightContainer = <Icon name="ios-checkmark" size={32} color="#666" />
-        }
+
+    if (this.props.required === false) {
+      rightContainer = <DText style={styles.optional}>opcional</DText>
+    } else {
+      if (this.props.errors[this.props.name]) {
+        rightContainer = <Icon name="ios-close" size={32} color="#DD2E2E" />
       }
     }
 
@@ -100,7 +83,8 @@ export default class Input extends Component {
         styles.inputContainer,
         this.props.containerStyle,
         (this.props.shadow) ? styles['inputContainer-shadow'] : {},
-        (this.props.multiline) ? styles['inputContainer-multiline'] : {}
+        (this.props.multiline) ? styles['inputContainer-multiline'] : {},
+        (this.props.errors[this.props.name]) ? styles['inputContainer-error'] : {}
       ]}>
         <View style={styles.leftContainer}>
           { this.leftContainer() }
@@ -113,10 +97,6 @@ export default class Input extends Component {
 
           {...this.props}
           style={[styles.input, this.props.style]}
-          onChangeText={(text) => {
-            this.validateInput(text);
-            (this.props.onChangeText) ? this.props.onChangeText(text) : null
-          }}
           style={[styles.input, this.props.style]}
           onBlur={() => {
             this.setPlaceholderText(true);
@@ -136,6 +116,7 @@ export default class Input extends Component {
 }
 
 Input.propTypes = {
+  name: React.PropTypes.string,
   icon: React.PropTypes.string,
   shadow: React.PropTypes.bool,
   optional: React.PropTypes.bool,
@@ -150,7 +131,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 3,
     marginTop: 10,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    borderWidth: 1,
+    borderColor: '#FFF'
   },
 
   'inputContainer-shadow': {
@@ -162,6 +145,10 @@ const styles = StyleSheet.create({
   'inputContainer-multiline': {
     height: 120,
     paddingVertical: 10
+  },
+
+  'inputContainer-error': {
+    borderColor: '#DD2E2E'
   },
 
   leftContainer: {
