@@ -13,7 +13,8 @@ import Input from 'app/common/components/Input'
 import Button from 'app/common/components/Button'
 import SignBackground from 'app/scenes/sign/components/SignBackground'
 
-class SignIn extends Component {
+@connect((state) => { return {} })
+export default class SignIn extends Component {
   constructor(props) {
     super(props)
 
@@ -23,9 +24,15 @@ class SignIn extends Component {
   }
 
   signUpPressed() {
-      // Actions.app({ type: ActionConst.RESET })
-      // Actions.appointments()
-      // Actions.calendarIndex()
+    this.setState({ loading: true })
+
+    this.props.screenProps.signIn({phone: this.state.user.phone, password: this.state.password})
+      .then(() => {
+        this.setState({ loading: false })
+      })
+      .catch(err => {
+        this.setState({ loading: false })
+      })
   }
 
   notMePressed() {
@@ -61,11 +68,12 @@ class SignIn extends Component {
           icon='ios-lock-outline'
           keyboardType='default'
           secureTextEntry
-          ref={component => this._passwordInput = component} />
+          onChangeText={(password) => this.setState({password})} />
 
         <Button
           size="large"
           color="primary"
+          loading={this.state.loading}
           onPress={this.signUpPressed.bind(this)}>
           Entrar
         </Button>
@@ -127,11 +135,3 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   }
 })
-
-function mapStateToProps(state) {
-  return {
-
-  };
-}
-
-export default connect(mapStateToProps)(SignIn)

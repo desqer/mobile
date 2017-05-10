@@ -46,7 +46,6 @@ class Header extends Component {
   }
 
   static title(state) {
-    console.log(state);
     return (
       <Input
         containerStyle={styles.inputContainer}
@@ -56,8 +55,7 @@ class Header extends Component {
         iconSize={16}
         iconColor="#AAA"
         placeholderTextColor="#AAA"
-        placeholder="Buscar um compromisso"
-      />
+        placeholder="Buscar um compromisso" />
     )
   }
 }

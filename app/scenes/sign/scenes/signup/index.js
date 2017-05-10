@@ -37,11 +37,15 @@ export default class SignUp extends Component {
   signUpPressed() {
     this.setState({ loading: true })
 
-    this.props.signUp({phone, name, password} = this.state).then((resp) => {
-      this.props.screenProps.signIn({phone, password} = resp).then(() => {
+    this.props.signUp({phone, name, password} = this.state)
+      .then((resp) => {
+        this.props.screenProps.signIn({phone, password} = resp).then(() => {
+          this.setState({ loading: false })
+        });
+      })
+      .catch(err => {
         this.setState({ loading: false })
-      });
-    })
+      })
   }
 
   signPhonePressed() {

@@ -20,7 +20,6 @@ export function signIn({phone, password}) {
         response
       })
     }).catch(response => {
-      console.log(response)
       dispatch({
         type: 'global/SET_ERRORS',
         errors: response.data.errors
