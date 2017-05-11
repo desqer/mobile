@@ -20,3 +20,9 @@ export const signUser = createReducer({}, {
     return action.response.data.user
   }
 })
+
+export const isFinishedLoading = createReducer({}, {
+  ['persist/REHYDRATE'](state, action) {
+    return true
+  }
+})

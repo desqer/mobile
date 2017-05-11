@@ -35,7 +35,10 @@ export default class Box extends Component {
 }
 
 Box.propTypes = {
-  children: React.PropTypes.element.isRequired
+  children: React.PropTypes.oneOfType([
+    React.PropTypes.arrayOf(React.PropTypes.node),
+    React.PropTypes.node
+  ])
 }
 
 const styles = new StyleSheet.create({

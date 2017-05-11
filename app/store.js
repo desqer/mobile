@@ -7,6 +7,7 @@ import {
 import { persistStore, autoRehydrate } from 'redux-persist'
 import { AsyncStorage } from 'react-native'
 
+
 /**
  * Middlewares
  */
@@ -23,10 +24,19 @@ import reducers from './redux/reducers'
  * Create redux store
  */
 const middleware = [thunkMiddleware, loggerMiddleware]
-const store = compose(
-  applyMiddleware(...middleware),
-  autoRehydrate()
-)(createStore)(reducers)
+
+const store = createStore(
+  reducers,
+  {
+    signUser: null,
+    signToken: null,
+    isFinishedLoading: false
+  },
+  compose(
+    applyMiddleware(...middleware),
+    autoRehydrate()
+  )
+)
 
 persistStore(store, {
   whitelist: [

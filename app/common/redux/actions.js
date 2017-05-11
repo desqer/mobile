@@ -19,6 +19,11 @@ export function signIn({phone, password}) {
         type: 'global/SET_SIGN_USER',
         response
       })
+
+      dispatch({
+        type: 'Navigation/NAVIGATE',
+        routeName: 'Calendar'
+      })
     }).catch(response => {
       dispatch({
         type: 'global/SET_ERRORS',

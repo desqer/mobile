@@ -28,7 +28,7 @@ export default class SignIn extends Component {
 
     this.props.screenProps.signIn({phone: this.state.user.phone, password: this.state.password})
       .then(() => {
-        this.setState({ loading: false })
+        // this.setState({ loading: false })
       })
       .catch(err => {
         this.setState({ loading: false })
