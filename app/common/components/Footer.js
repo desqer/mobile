@@ -1,44 +1,51 @@
-import React from 'react'
+import React, { Component } from 'react';
 import {
   View,
   StyleSheet,
-} from 'react-native'
+  TouchableOpacity,
+} from 'react-native';
 
 import DText from 'app/common/components/DText'
 import Icon from 'react-native-vector-icons/Ionicons'
 
-export const ProfileIcon = ({ selected, title }) => {
-  return (
-    <View style={styles.tabIcon}>
-      <Icon color='#FFF' size={26} name="ios-person-outline" />
-      <DText style={styles.tabText}>{ title }</DText>
-    </View>
-  )
-}
-
-export const DesqerIcon = ({ selected, title }) => {
-  return (
-    <View style={styles.hexagon}>
-      <View style={styles.hexagonInner}>
-         <Icon style={styles.tabIcon}
-           name="md-add"
-           size={30}
-           color="#BE446D"
-           />
-       </View>
-       <View style={styles.hexagonBefore} />
-       <View style={styles.hexagonAfter} />
-     </View>
-  )
-}
-
-export const HistoryIcon = ({ selected, title }) => {
-  return (
-    <View style={styles.tabIcon}>
-      <Icon color='#FFF' size={26} name="ios-bookmarks-outline" />
-      <DText style={styles.tabText}>{ title }</DText>
-    </View>
-  )
+export default class Footer extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <TouchableOpacity style={styles.tab}>
+          <Icon style={styles.tabIcon}
+            name="ios-people-outline"
+            size={26}
+            color="#FFF"
+            />
+          <DText style={styles.tabText}>Minha conta</DText>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.tab}
+          activeOpacity={1.0}
+          onPress={this.props.onNewPressed}>
+          <View style={styles.hexagon}>
+            <View style={styles.hexagonInner}>
+              <Icon style={styles.tabIcon}
+                name="md-add"
+                size={30}
+                color="#BE446D"
+                />
+            </View>
+            <View style={styles.hexagonBefore} />
+            <View style={styles.hexagonAfter} />
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.tab}>
+          <Icon style={styles.tabIcon}
+            name="ios-bookmarks-outline"
+            size={26}
+            color="#FFF"
+            />
+          <DText style={styles.tabText}>Faturas</DText>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -56,13 +63,14 @@ const styles = StyleSheet.create({
   },
 
   tabIcon: {
-    alignItems: 'center'
+    alignSelf: 'center'
   },
 
   tabText: {
     alignSelf: 'center',
     color: '#FFF',
-    fontSize: 11
+    fontSize: 11,
+    fontFamily: 'Helvetica'
   },
 
   hexagon: {
@@ -70,21 +78,19 @@ const styles = StyleSheet.create({
     height: 60,
     alignSelf: 'center'
   },
-
   hexagonInner: {
     width: 60,
     height: 30,
     backgroundColor: '#FFF',
     position: 'absolute',
-    top: -3,
+    top: -10,
     shadowColor: "#333",
     shadowOpacity: 0.2,
     shadowRadius: 5,
-    alignItems: 'center'
   },
   hexagonAfter: {
     position: 'absolute',
-    bottom: 13,
+    bottom: 20,
     borderLeftWidth: 30,
     borderLeftColor: 'transparent',
     borderRightWidth: 30,
@@ -94,7 +100,7 @@ const styles = StyleSheet.create({
   },
   hexagonBefore: {
     position: 'absolute',
-    top: -23,
+    top: -30,
     borderLeftWidth: 30,
     borderLeftColor: 'transparent',
     borderRightWidth: 30,

@@ -13,12 +13,12 @@ import DText from 'app/common/components/DText'
 import Input from 'app/common/components/Input'
 import Icon from 'react-native-vector-icons/Ionicons'
 
-class Header extends Component {
+export default class Header extends Component {
 
-  static left(state) {
+  renderLeft() {
     return (
       <TouchableOpacity
-        style={[styles.headerAlign, styles.leftButton]}
+        style={[styles.leftButton]}
         activeOpacity={0.6}
         onPress={() => Actions.pop()}
       >
@@ -27,10 +27,10 @@ class Header extends Component {
     )
   }
 
-  static right(state) {
+  renderRight() {
     return (
       <TouchableOpacity
-        style={[styles.headerAlign, styles.rightButton]}
+        style={[styles.rightButton]}
         activeOpacity={0.6}
       >
         <View style={styles.notificationContainer}>
@@ -45,17 +45,22 @@ class Header extends Component {
     )
   }
 
-  static title(state) {
+  renderTitle() {
     return (
-      <Input
-        containerStyle={styles.inputContainer}
-        iconContainerStyle={styles.icon}
-        inputStyle={[styles.input]}
-        icon='ios-search'
-        iconSize={16}
-        iconColor="#AAA"
-        placeholderTextColor="#AAA"
-        placeholder="Buscar um compromisso" />
+      <DText style={styles.title}>
+        Texto
+      </DText>
+    )
+  }
+
+  render() {
+    return (
+      <View style={styles.headerContainer}>
+        { this.renderLeft() }
+        <View style={styles.titleContainer}>
+          { this.renderTitle() }
+        </View>
+      </View>
     )
   }
 }
@@ -72,11 +77,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0,
     flexDirection: 'row',
     position: 'absolute',
-    top: 0
-  },
-
-  headerAlign: {
-    alignSelf: 'center'
+    top: 0,
+    left: 0,
+    right: 0
   },
 
   rightButton: {
@@ -89,34 +92,15 @@ const styles = StyleSheet.create({
     marginRight: 15
   },
 
-  inputContainer: {
-    height: 30,
-    backgroundColor: '#F5F5F5',
-    borderRadius: 3,
-    paddingLeft: 15,
-    flexDirection: 'row',
-    flex: 1,
-    marginTop: 0
-  },
-
   titleContainer: {
     flex: 1,
+  },
+
+  title: {
     lineHeight: 30,
     textAlign: 'center',
     color: '#333',
     fontWeight: 'bold',
-},
-
-  icon: {
-    alignSelf: 'center',
-    paddingLeft: 0
-  },
-
-  input: {
-    fontSize: 12,
-    color: '#666',
-    flex: 1,
-    paddingHorizontal: 10
   },
 
   notificationContainer: {
@@ -139,5 +123,3 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   }
 })
-
-export default connect((state) => { return { nav: state.nav } })(Header)

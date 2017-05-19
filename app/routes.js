@@ -2,7 +2,13 @@ import React, { Component } from 'react'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { StackNavigator, addNavigationHelpers, NavigationActions } from 'react-navigation'
+import {
+  StackNavigator,
+  TabNavigator,
+  addNavigationHelpers,
+  NavigationActions
+} from 'react-navigation'
+
 import { ActionCreators } from 'app/redux/actions'
 import { store } from './store'
 
@@ -11,6 +17,7 @@ import { store } from './store'
  */
 import Header from 'app/scenes/calendar/components/Header'
 import Splash from 'app/common/components/Splash'
+import Footer from 'app/common/components/Footer'
 
 import SignPhone from 'app/scenes/sign/scenes/signphone'
 import SignUp from 'app/scenes/sign/scenes/signup'
@@ -18,6 +25,14 @@ import SignIn from 'app/scenes/sign/scenes/signin'
 import Calendar from 'app/scenes/calendar'
 import Detail from 'app/scenes/calendar/scenes/detail'
 import New from 'app/scenes/calendar/scenes/new'
+
+const headerProps = {
+  headerMode: 'float',
+  initialRouteName: 'Calendar',
+  navigationOptions: {
+    header: props => <Header {...props} />
+  }
+};
 
 export const AuthRoutes = StackNavigator({
   SignPhone: { screen: SignPhone },
@@ -28,32 +43,21 @@ export const AuthRoutes = StackNavigator({
   initialRouteName: 'SignPhone'
 });
 
-export const Routes = StackNavigator({
-  Calendar: { screen: Calendar }
+export const Routes = TabNavigator({
+  Profile: { screen: StackNavigator({
+    Calendar: { screen: Calendar }
+  }, headerProps)},
+  Appointments: { screen: StackNavigator({
+    Calendar: { screen: Calendar }
+  }, headerProps)},
+  History: { screen: StackNavigator({
+    Calendar: { screen: Calendar }
+  }, headerProps)}
 }, {
-  headerMode: 'screen',
-  initialRouteName: 'Calendar',
-  navigationOptions: {
-    header: ({ state }) => ({
-      left: Header.left(state),
-      right: Header.right(state),
-      style: {
-        backgroundColor: '#FFF',
-        shadowColor: "#ddd",
-        shadowOpacity: 1,
-        shadowRadius: 10,
-        paddingTop: 25,
-        paddingHorizontal: 15,
-        paddingBottom: 10,
-        borderBottomWidth: 0,
-        flexDirection: 'row',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0
-      }
-    })
-  }
+  initialRouteName: 'Appointments',
+  tabBarComponent:  props => <Footer {...props} />,
+  swipeEnabled: true,
+  backBehavior: 'initialRoute'
 })
 
 class Router extends Component {

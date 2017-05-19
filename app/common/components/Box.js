@@ -20,9 +20,14 @@ export default class Box extends Component {
 
     return (
       <ContainerElement
+        {...this.props}
         activeOpacity={0.6}
-        style={[styles.boxContainer, this.props.boxStyle]}
-        {...this.props}>
+        style={[
+          (this.props.leftMark) ? styles.leftMarked : {},
+          styles.boxContainer,
+          this.props.style
+        ]}
+      >
 
         <View style={styles.contentContainer}>
           { this.props.children }
@@ -38,7 +43,8 @@ Box.propTypes = {
   children: React.PropTypes.oneOfType([
     React.PropTypes.arrayOf(React.PropTypes.node),
     React.PropTypes.node
-  ])
+  ]),
+  leftMark: React.PropTypes.bool
 }
 
 const styles = new StyleSheet.create({
@@ -51,6 +57,11 @@ const styles = new StyleSheet.create({
     shadowRadius: 8,
     flexDirection: 'row',
     marginBottom: 15
+  },
+
+  leftMarked: {
+    borderLeftWidth: 10,
+    borderColor: "#EE8B6C"
   },
 
   contentContainer: {

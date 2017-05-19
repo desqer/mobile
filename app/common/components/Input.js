@@ -97,13 +97,12 @@ export default class Input extends Component {
 
           {...this.props}
           style={[styles.input, this.props.style]}
-          style={[styles.input, this.props.style]}
           onBlur={() => {
-            this.setPlaceholderText(true);
+            this.setPlaceholderText(true)
             (this.props.onBlur) ? this.props.onBlur() : null
           }}
           onFocus={() => {
-            this.setPlaceholderText();
+            this.setPlaceholderText()
             (this.props.onFocus) ? this.props.onFocus() : null
           }}
         />

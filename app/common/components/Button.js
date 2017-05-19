@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 
 import DText from 'app/common/components/DText'
+import Loading from 'app/common/components/Loading'
 import Variables from 'app/common/stylesheet/Variables'
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -18,7 +19,7 @@ export default class Button extends Component {
   }
 
   renderLoadingContent() {
-    return <ActivityIndicator color="white" />
+    return <Loading color="white" size={1} />
   }
 
   renderButtonContent() {
@@ -28,16 +29,19 @@ export default class Button extends Component {
         <Icon
           style={[styles.icon, this.props.iconStyle]}
           name={this.props.icon}
-          size={this.props.iconSize || 16}
+          size={this.props.iconSize || 20}
           color={this.props.iconColor || '#FFF'}
         />
       )
     }
 
     return (
-      <View>
+      <View style={styles.buttonContent}>
         { icon }
-        <DText style={styles.buttonText}>
+        <DText style={[
+            styles.buttonText,
+            (this.props.size) ? styles['text-size-' + this.props.size] : {}
+          ]}>
           { this.props.children }
         </DText>
       </View>
@@ -48,17 +52,15 @@ export default class Button extends Component {
     return (
       <TouchableOpacity
         activeOpacity={0.9}
+        {...this.props}
         style={[
           styles.button,
           (this.props.size) ? styles['button-size-' + this.props.size] : {},
           (this.props.type) ? styles['button-type-' + this.props.type] : {},
           (this.props.color) ? styles['button-color-' + this.props.color] : {},
           this.props.style
-        ]}
-        {...this.props}>
-        <View style={styles.buttonContent}>
-          { this.props.loading ? this.renderLoadingContent() : this.renderButtonContent() }
-        </View>
+        ]}>
+        { this.props.loading ? this.renderLoadingContent() : this.renderButtonContent() }
       </TouchableOpacity>
     )
   }
@@ -84,7 +86,7 @@ const styles = StyleSheet.create({
   },
 
   'button-size-small': {
-    height: 28
+    height: 28,
   },
 
   'button-color-primary': {
@@ -104,17 +106,26 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    marginRight: 10
+    marginRight: 10,
+    marginTop: 2,
+    alignSelf: 'center'
   },
 
   buttonContent: {
-    alignSelf: 'center',
     flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 20
   },
 
   buttonText: {
     color: '#FFF',
     fontWeight: 'bold',
-    fontSize: 14
+    fontSize: 14,
+    flex: 1,
+    textAlign: 'center'
+  },
+
+  'text-size-small': {
+    fontSize: 12
   }
 })

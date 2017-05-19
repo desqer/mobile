@@ -7,7 +7,6 @@ import {
 import { persistStore, autoRehydrate } from 'redux-persist'
 import { AsyncStorage } from 'react-native'
 
-
 /**
  * Middlewares
  */

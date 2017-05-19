@@ -6,15 +6,34 @@ import {
   ScrollView,
   ListView,
   Keyboard,
-  ActivityIndicatorIOS
+  ActivityIndicator,
+  RefreshControl
 } from 'react-native'
 
+import { connect } from 'react-redux'
+
+import { bindActionCreators } from 'redux'
+import * as Actions from './actions'
+
+import Wrap from 'app/common/components/Wrap'
 import DText from 'app/common/components/DText'
 import Event from 'app/scenes/calendar/components/Event'
+import SearchHeader from 'app/scenes/calendar/components/SearchHeader'
 
+function mapStateToProps(state) {
+  return {
+  }
+}
+
+@connect(mapStateToProps, (dispatch) => bindActionCreators(Actions, dispatch))
 export default class Calendar extends Component {
+  static navigationOptions = {
+    header: <SearchHeader />
+  }
+
   constructor(props) {
     super(props)
+
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2,
       sectionHeaderHasChanged: (s1, s2) => s1 !== s2
@@ -23,7 +42,9 @@ export default class Calendar extends Component {
     this.state = {
       items: [],
       dataBlob: {},
-      dataSource: ds.cloneWithRows([])
+      dataSource: ds.cloneWithRows([]),
+      refreshing: false,
+      loading: true
     }
 
     this.setSource = this.setSource.bind(this)
@@ -43,60 +64,86 @@ export default class Calendar extends Component {
     // Actions.show()
   }
 
-  componentDidMount() {
-    const eventItems = {
-      'Hoje, 14 de Janeiro': [
-        {
-          key: Date.now(),
-          time: '9:00 às 10:00h',
-          place: 'Cabelo & Cia',
-          title: 'Corte de cabelo e barba',
-          description: 'com Diego Schell Fernandes'
-        },
-        {
-          key: Date.now(),
-          time: '10:00 às 11:00h',
-          place: 'Cabelo & Cia',
-          title: 'Corte de cabelo e barba',
-          description: 'com Diego Schell Fernandes'
-        }
-      ],
-      'Amanhã, 15 de Janeiro': [
-        {
-          key: Date.now(),
-          time: '08:00 às 11:00h',
-          place: 'Cabelo & Cia',
-          title: 'Corte de cabelo e barba',
-          description: 'com Diego Schell Fernandes'
-        }
-      ]
-    }
+  fetchAppointments() {
+    this.props.fetchAppointments().then(response => {
+      this.setSource(response.data)
+      this.setState({
+        loading: false,
+        refreshing: false
+      })
+    }).catch(err => {
+      console.log(err)
+    })
+  }
 
-    this.setSource(eventItems)
+  approveAppointment(appointmentId) {
+    this.props.approveAppointment(appointmentId).then(() => {
+      this.fetchAppointments()
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+
+  cancelAppointment(appointmentId) {
+    this.props.cancelAppointment(appointmentId).then(() => {
+      this.fetchAppointments()
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+
+  componentDidMount() {
+    this.fetchAppointments()
+  }
+
+  _onRefresh() {
+    this.setState({ refreshing: true })
+    this.fetchAppointments()
   }
 
   render() {
     return (
-      <View style={styles.container}>
+      <Wrap>
         <View style={styles.contentContainer}>
-          <ListView
-            enableEmptySections
-            style={styles.eventListContainer}
-            dataSource={this.state.dataSource}
-            onScroll={() => Keyboard.dismiss()}
-            renderRow={({key, ...value}) => {
-              return (
-                <Event
-                  key={key}
-                  onPress={() => this.handleEventPressed()}
-                  {...value}
-                  />
-              )
-            }}
-            renderSectionHeader={this.renderSectionHeader}
-            />
+          { this.state.loading ? this.renderLoadingView() : this.renderListView() }
         </View>
-      </View>
+      </Wrap>
+    )
+  }
+
+  renderLoadingView() {
+    return (
+      <ActivityIndicator style={styles.eventListContainer} color='#999' />
+    )
+  }
+
+  renderListView() {
+    return (
+      <ListView
+        enableEmptySections
+        style={styles.eventListContainer}
+        dataSource={this.state.dataSource}
+        onScroll={() => Keyboard.dismiss()}
+        refreshControl={
+          <RefreshControl
+            tintColor='#999'
+            refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh.bind(this)}
+          />
+        }
+        renderRow={({key, ...appointment}) => {
+          return (
+            <Event
+              key={key}
+              onPress={() => this.handleEventPressed()}
+              onApprove={() => { this.approveAppointment(appointment.id) }}
+              onCancel={() => { this.cancelAppointment(appointment.id) }}
+              {...appointment}
+              />
+          )
+        }}
+        renderSectionHeader={this.renderSectionHeader}
+        />
     )
   }
 
@@ -108,12 +155,6 @@ export default class Calendar extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f5f5f5',
-    paddingTop: 65
-  },
-
   contentContainer: {
     flex: 1
   },

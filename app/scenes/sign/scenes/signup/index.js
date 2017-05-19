@@ -39,9 +39,10 @@ export default class SignUp extends Component {
 
     this.props.signUp({phone, name, password} = this.state)
       .then((resp) => {
-        this.props.screenProps.signIn({phone, password} = resp).then(() => {
-          this.setState({ loading: false })
-        });
+        this.props.screenProps.signIn({phone, password} = resp)
+          .catch(err => {
+            this.setState({ loading: false })
+          });
       })
       .catch(err => {
         this.setState({ loading: false })
